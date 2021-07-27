@@ -1,0 +1,36 @@
+.about{
+    width: 100%;
+    /*a_bg*/
+}
+
+
+.about-photo img{
+    width: 100%;
+    height: auto;
+}
+
+
+.about-content{
+    padding-left: 40px;
+    box-sizing: border-box;
+}
+
+.about-content__title{
+    /*a_h_c*/
+    margin-bottom: 30px;
+}
+.about-content__text{
+    font-weight: 300;
+    /*a_t_fz*/
+    /*a_t_c*/
+    text-indent: 20px;
+    line-height: 20px;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .about-content{
+        margin-top: 30px;
+        padding-left: 12px;
+    }
+}

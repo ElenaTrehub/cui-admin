@@ -1,0 +1,36 @@
+.feature{
+    width: 100%;
+    /*f_bg*/
+}
+.feature__title{
+    /*f_h_c*/
+    text-align: center;
+}
+.feature-item{
+    margin-bottom: 20px;
+}
+.feature-item__title{
+    /*f_t_c*/
+    /*f_z_fit*/
+    text-transform: uppercase;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.feature-item__title span{
+    /*f_t_span_c*/
+    /*f_z_f_span*/
+    margin-right: 20px;
+}
+
+
+
+.feature-item__text{
+    font-weight: 300;
+    /*f_text_fz*/
+    /*f_text_c*/
+    /*f_text_border*/
+    line-height: 20px;
+    text-align: justify;
+    padding-left: 15px;
+}
+
