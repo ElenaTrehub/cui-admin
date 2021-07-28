@@ -1,38 +1,37 @@
-.feature{
+ .feature{
     width: 100%;
     /*f_bg*/
 }
 .feature__title{
-    /*f_h_c*/
     text-align: center;
 }
 .feature-item{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     margin-bottom: 40px;
-    padding: 0 10px;
+    padding: 20px;
+    /*border_item*/
+    box-sizing: border-box;
+    border-radius: 5px;
+
 }
-.feature-item_icon{
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    font-size: 30px;
-    /*i_bg*/
-    /*i_f_c*/
+
+.feature-item_number{
+    font-size: 40px;
+    /*n_f_c*/
+    /*n_fz_c*/
     margin-bottom: 20px;
+
+    text-align: left;
 }
 
 .feature-item__title{
     /*f_t_c*/
     /*f_z_fit*/
     text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 15px;
+    text-align: left;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    /*t_border*/
+
 }
 
 
@@ -41,36 +40,6 @@
     /*f_text_fz*/
     /*f_text_c*/
     line-height: 20px;
-    text-align: center;
+    text-align: justify;
 }
 
-.fa, .fas, .far, .fal, .fad, .fab {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-}
-.fa-bullhorn:before {
-    content: "\f0a1"; }
-.fa-comment-dollar:before {
-    content: "\f651"; }
-.fa-mail-bulk:before {
-    content: "\f674"; }
-.fa-atom:before {
-    content: "\f5d2"; }
-
-@font-face {
-    font-family: 'Font Awesome 5 Free';
-    font-style: normal;
-    font-weight: 900;
-    font-display: block;
-    src: url("../webfonts/fa-solid-900.eot");
-    src: url("../webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../webfonts/fa-solid-900.woff2") format("woff2"), url("../webfonts/fa-solid-900.woff") format("woff"), url("../webfonts/fa-solid-900.ttf") format("truetype"), url("../webfonts/fa-solid-900.svg#fontawesome") format("svg"); }
-
-.fa, .fas {
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-}

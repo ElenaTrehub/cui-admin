@@ -1,3 +1,4 @@
+
     const slides = document.querySelectorAll('.feedback-slider-item'),
         texts = document.querySelectorAll('.feedback-text'),
         prev = document.querySelector('.feedback-prev-btn'),
@@ -50,24 +51,9 @@
 
 
 
-    function setHeightFeedback(){
-        let maxHeightItem = 0;
-        texts.forEach(item => {
-            if(item.offsetHeight > maxHeightItem){
-                maxHeightItem = item.offsetHeight;
-            }
-        });
 
-        texts.forEach(item => {
-            item.style.height = maxHeightItem + 'px';
-
-        });
-    }
-    setHeightFeedback();
 
     window.onresize = function (slideWidth){
-
-        setHeightFeedback();
 
         slides.forEach(slide => {
             if(document.documentElement.clientWidth >= 768 && document.documentElement.clientWidth < 992){
@@ -129,5 +115,3 @@
 
     });
     /*feedback_h_c*/
-
-

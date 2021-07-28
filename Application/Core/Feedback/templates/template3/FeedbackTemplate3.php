@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Application\Core\Feedback\templates\template2;
+namespace Application\Core\Feedback\templates\template3;
 
 
 use Application\Services\UtilsService;
 
-class FeedbackTemplate2
+class FeedbackTemplate3
 {
     public $utilsService;
 
@@ -42,15 +42,13 @@ class FeedbackTemplate2
         if(strpos($obj->js, '/*feedback_h_c*/',0)!==false){
             $obj->js = $this->utilsService->parseStyle($obj->js, '/*feedback_h_c*/', 'feedbackTitle.classList.add("title-light");');
         }
-        if(strpos($obj->style, '/*f_text_bg*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*f_text_bg*/', 'background-color: '.$colors->thirdBg.';');
-        }
-        if(strpos($obj->style, '/*f_text_border*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*f_text_border*/', 'border-top: 10px solid'.$colors->thirdBg.';');
+        if(strpos($obj->style, '/*feed_h_c*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_h_c*/', 'color: '.$colors->titleColor.';');
         }
         if(strpos($obj->style, '/*feed_t_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_t_c*/', 'color: '.$colors->linkColor.';');
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_t_c*/', 'color: '.$colors->textColor.';');
         }
+
         if(strpos($obj->style, '/*feed_s_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_s_c*/', 'color: '.$colors->titleColor.';');
         }
@@ -63,14 +61,11 @@ class FeedbackTemplate2
         if(strpos($obj->js, '/*feedback_h_c*/',0)!==false){
             $obj->js = $this->utilsService->parseStyle($obj->js, '/*feedback_h_c*/', 'feedbackTitle.classList.add("title-dark");');
         }
-        if(strpos($obj->style, '/*f_text_bg*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*f_text_bg*/', 'background-color: #ffffff;');
-        }
-        if(strpos($obj->style, '/*f_text_border*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*f_text_border*/', 'border-top: 10px solid #ffffff;');
+        if(strpos($obj->style, '/*feed_h_c*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_h_c*/', 'color: '.$colors->anyTextColor.';');
         }
         if(strpos($obj->style, '/*feed_t_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_t_c*/', 'color: '.$colors->textColor.';');
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_t_c*/', 'color: #ffffff;');
         }
         if(strpos($obj->style, '/*feed_s_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_s_c*/', 'color: '.$colors->anyTextColor.';');
@@ -296,6 +291,4 @@ class FeedbackTemplate2
 
 
     }
-
-
 }

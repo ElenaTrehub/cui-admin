@@ -4,7 +4,7 @@
 namespace Application\Services;
 
 
-class WeightService
+class UtilsService
 {
     public function getItemByWeight($arr){
 
@@ -20,6 +20,14 @@ class WeightService
 
         return $arr[1];
 
+    }
+
+    public function parseStyle($str, $flag, $refactorString){
+
+        if(strpos($str, $flag, 0)!==false){
+            $style = str_replace($flag, $refactorString, $str);
+        }
+        return $style;
     }
 
 }

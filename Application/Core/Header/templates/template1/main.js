@@ -1,9 +1,9 @@
-(function() {
-
-    "use strict";
 
     let toggles = document.querySelectorAll(".toggle-hamburger");
-    let menu = document.querySelector(".menu");
+    let menu = document.querySelector("nav");
+
+
+
     menu.classList.add('animate__animated');
 
 
@@ -36,4 +36,6 @@
         });
     }
 
-})();
+
+    //header-fixed
+

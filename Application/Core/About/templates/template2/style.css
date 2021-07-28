@@ -1,43 +1,42 @@
 .about{
     width: 100%;
-    /*a_p*/
-    box-sizing: border-box;
     /*a_bg*/
-    position: relative;
-    overflow: hidden;
-}
-
-
-.about-photo img{
-    width: 100%;
-    height: auto;
-}
-
-
-.about-content{
-    padding-left: 40px;
-    box-sizing: border-box;
-}
-.title{
-    /*a_h_fz*/
-    /*t_f_w*/
 }
 .about-content__title{
-    /*a_h_c*/
-    margin-bottom: 30px;
+    text-align: center;
 }
-.about-content__text{
-    font-weight: 300;
+.section_content h3{
+    /*a_h3_c*/
+    /*a_h3_fz*/
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.section_content h2{
+    /*a_h2_fz*/
+    text-transform: uppercase;
+    /*a_h2_c*/
+    text-align: center;
+    margin-bottom: 20px;
+}
+.section_content p{
     /*a_t_fz*/
     /*a_t_c*/
-    text-indent: 20px;
-    line-height: 20px;
-    text-align: justify;
+    margin-bottom: 20px;
 }
+.about-first_block p:nth-child(2n){
+    /*a_f_b_c*/
+}
+.about-last_block p:nth-child(2n+1){
+    /*a_l_b_c*/
+}
+.person{
+    text-align: center;
+    margin-bottom: 40px;
 
-@media (max-width: 768px) {
-    .about-content{
-        margin-top: 30px;
-        padding-left: 12px;
-    }
+}
+.person img{
+    max-width: 220px;
+    display: inline-block;
+    border-radius: 50%;
 }
