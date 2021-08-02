@@ -1,23 +1,26 @@
 <?php
 
 
-namespace Application\Core\Feedback\templates\template3;
+namespace Application\Core\Service\templates\template1;
 
 
 use Application\Core\JsLibs\JsLibs;
+use Application\Core\Settings\Settings;
 use Application\Services\UtilsService;
 
-class FeedbackTemplate3
+class ServiceTemplate1
 {
     public $utilsService;
     public $jsLibs;
+    public $settings;
 
     public function __construct()
     {
         $this->utilsService = new UtilsService();
         $this->jsLibs = new JsLibs();
+        $this->settings = new Settings();
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $colors, $set){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $colors, $set, $id){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
@@ -25,6 +28,8 @@ class FeedbackTemplate3
         $obj->js = $jsString;
         $obj->set = $set;
 
+
+        $obj = $this->setPhoto($obj, $id);
 
 
         if($obj->set->theme == 'normal'){
@@ -40,17 +45,32 @@ class FeedbackTemplate3
 
         return $obj;
     }
+
+    public function setPhoto($obj, $id){
+        if(strpos($obj->html, '<!--im_service_1-->',0)!==false){
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_service_1-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/service-1.jpg" alt="service">');
+        }
+        if(strpos($obj->html, '<!--im_service_2-->',0)!==false){
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_service_2-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/service-2.jpg" alt="service">');
+        }
+        if(strpos($obj->html, '<!--im_service_3-->',0)!==false){
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_service_3-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/service-3.jpg" alt="service">');
+        }
+        return $obj;
+    }
+
+
     public function setJs($obj){
 
         if(isset($obj->set->getSliderOfThreeItems)){
-            if(strpos($obj->js, '//js_code_feedback',0)!==false){
-                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', 'slidesThreeSlider(".feedback-slider-item", ".feedback-wrapper", ".feedback-slider", ".feedback-prev-btn", ".feedback-next-btn");');
+            if(strpos($obj->js, '//js_code_service',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_service', 'slidesThreeSlider(".service-slider-item", ".service-wrapper", ".service-slider", ".service-prev-btn", ".service-next-btn");');
             }
         }
         else{
             $obj->set->getSliderOfThreeItems = true;
-            if(strpos($obj->js, '//js_code_feedback',0)!==false){
-                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', $this->jsLibs->getJsLib('getSliderOfThreeItems').'slidesThreeSlider(".feedback-slider-item", ".feedback-wrapper", ".feedback-slider", ".feedback-prev-btn", ".feedback-next-btn");');
+            if(strpos($obj->js, '//js_code_service',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_service', $this->jsLibs->getJsLib('getSliderOfThreeItems').'slidesThreeSlider(".service-slider-item", ".service-wrapper", ".service-slider", ".service-prev-btn", ".service-next-btn");');
             }
         }
 
@@ -58,39 +78,38 @@ class FeedbackTemplate3
 
     }
     public function setColorsForChildInLightBlock($obj, $colors){
-        if(strpos($obj->js, '/*feedback_h_c*/',0)!==false){
-            $obj->js = $this->utilsService->parseStyle($obj->js, '/*feedback_h_c*/', 'feedbackTitle.classList.add("title-light");');
+        if(strpos($obj->js, '/*service_h_c*/',0)!==false){
+            $obj->js = $this->utilsService->parseStyle($obj->js, '/*service_h_c*/', 'serviceTitle.classList.add("title-light");');
         }
-        if(strpos($obj->style, '/*feed_h_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_h_c*/', 'color: '.$colors->titleColor.';');
+        if(strpos($obj->style, '/*service_head_c*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_head_c*/', 'color: '.$colors->titleColor.';');
         }
-        if(strpos($obj->style, '/*feed_t_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_t_c*/', 'color: '.$colors->textColor.';');
+        if(strpos($obj->style, '/*service_t_c*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_t_c*/', 'color: '.$colors->textColor.';');
         }
-
-        if(strpos($obj->style, '/*feed_s_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_s_c*/', 'color: '.$colors->titleColor.';');
+        if(strpos($obj->style, '/*ser_c_content*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*ser_c_content*/', 'color: '.$colors->textColor.';');
         }
-        if(strpos($obj->style, '/*feed_btn_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_btn_c*/', 'color: '.$colors->titleColor.';');
+        if(strpos($obj->style, '/*service_btn_c*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_btn_c*/', 'color: '.$colors->titleColor.';');
         }
     }
 
     public function setColorsForChildInDarkBlock($obj, $colors){
-        if(strpos($obj->js, '/*feedback_h_c*/',0)!==false){
-            $obj->js = $this->utilsService->parseStyle($obj->js, '/*feedback_h_c*/', 'feedbackTitle.classList.add("title-dark");');
+        if(strpos($obj->js, '/*service_h_c*/',0)!==false){
+            $obj->js = $this->utilsService->parseStyle($obj->js, '/*service_h_c*/', 'serviceTitle.classList.add("title-dark");');
         }
-        if(strpos($obj->style, '/*feed_h_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_h_c*/', 'color: '.$colors->anyTextColor.';');
+        if(strpos($obj->style, '/*service_head_c*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_head_c*/', 'color: '.$colors->anyTextColor.';');
         }
-        if(strpos($obj->style, '/*feed_t_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_t_c*/', 'color: #ffffff;');
+        if(strpos($obj->style, '/*service_t_c*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_t_c*/', 'color: '.$colors->linkColor.';');
         }
-        if(strpos($obj->style, '/*feed_s_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_s_c*/', 'color: '.$colors->anyTextColor.';');
+        if(strpos($obj->style, '/*ser_c_content*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*ser_c_content*/', 'color: '.$colors->linkColor.';');
         }
-        if(strpos($obj->style, '/*feed_btn_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_btn_c*/', 'color: '.$colors->linkColor.';');
+        if(strpos($obj->style, '/*service_btn_c*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_btn_c*/', 'color: '.$colors->linkColor.';');
         }
     }
 
@@ -107,7 +126,7 @@ class FeedbackTemplate3
                 $bgFeature = [$colors->thirdBg, '#555555', $colors->mainBg];
                 $index = rand(0, 2);
 
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_bg*/', 'background-color: '.$bgFeature[$index].';');
+                $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_bg*/', 'background-color: '.$bgFeature[$index].';');
 
                 $obj->set->lastSectionColor = 'dark';
 
@@ -120,7 +139,7 @@ class FeedbackTemplate3
                 $bgFeature = ['#ffffff', '#f0f1f6', $colors->secondBg];
                 $index = rand(0, 2);
 
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_bg*/', 'background-color: '.$bgFeature[$index].';');
+                $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_bg*/', 'background-color: '.$bgFeature[$index].';');
 
                 $obj->set->lastSectionColor = 'light';
 
@@ -136,7 +155,7 @@ class FeedbackTemplate3
             $bgFeature = [ '#ffffff', '#f0f1f6',  $colors->secondBg, $colors->thirdBg, '#555555', $colors->mainBg];
             $index = rand(0, 5);
 
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_bg*/', 'background-color: '.$bgFeature[$index].';');
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_bg*/', 'background-color: '.$bgFeature[$index].';');
 
             if($index < 3) {
                 $this->setColorsForChildInLightBlock($obj, $colors);
@@ -168,7 +187,7 @@ class FeedbackTemplate3
             $colorStr = $obj->set->lastSectionColor;
             switch ($colorStr){
                 case "$colors->secondBg":{
-                    if(strpos($obj->style, '/*feed_bg*/',0)!==false) {
+                    if(strpos($obj->style, '/*service_bg*/',0)!==false) {
 
                         $bgAbout  = ['#ffffff', '#f0f1f6'];
                         $index = rand(0, 1);
@@ -179,7 +198,7 @@ class FeedbackTemplate3
 
                 }
                 case '#ffffff':{
-                    if(strpos($obj->style, '/*feed_bg*/',0)!==false) {
+                    if(strpos($obj->style, '/*service_bg*/',0)!==false) {
 
                         $bgAbout  = [$colors->secondBg, '#f0f1f6'];
                         $index = rand(0, 1);
@@ -190,7 +209,7 @@ class FeedbackTemplate3
 
                 }
                 case '#f0f1f6':{
-                    if(strpos($obj->style, '/*feed_bg*/',0)!==false) {
+                    if(strpos($obj->style, '/*service_bg*/',0)!==false) {
 
                         $bgAbout  = ['#ffffff', $colors->secondBg];
                         $index = rand(0, 1);
@@ -202,7 +221,7 @@ class FeedbackTemplate3
                 }
                 default: {
 
-                    if(strpos($obj->style, '/*feed_bg*/',0)!==false) {
+                    if(strpos($obj->style, '/*service_bg*/',0)!==false) {
 
                         $bgAbout  = ['#ffffff', '#f0f1f6'];
                         $index = rand(0, 1);
@@ -222,8 +241,8 @@ class FeedbackTemplate3
             $bgColor = $bgAbout[$index];
 
         }
-        if(strpos($obj->style, '/*feed_bg*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_bg*/', 'background-color: ' . $bgColor . ';');
+        if(strpos($obj->style, '/*service_bg*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_bg*/', 'background-color: ' . $bgColor . ';');
         }
         $obj->set->lastSectionColor = $bgColor;
 
@@ -244,7 +263,7 @@ class FeedbackTemplate3
             $colorStr = $obj->set->lastSectionColor;
             switch ($colorStr){
                 case "$colors->mainBg":{
-                    if(strpos($obj->style, '/*feed_bg*/',0)!==false) {
+                    if(strpos($obj->style, '/*service_bg*/',0)!==false) {
 
                         $bgAbout  = [$colors->thirdBg, '#555555'];
                         $index = rand(0, 1);
@@ -256,7 +275,7 @@ class FeedbackTemplate3
                     break;
                 }
                 case "$colors->thirdBg":{
-                    if(strpos($obj->style, '/*feed_bg*/',0)!==false) {
+                    if(strpos($obj->style, '/*service_bg*/',0)!==false) {
 
                         $bgAbout  = [$colors->mainBg, '#555555'];
                         $index = rand(0, 1);
@@ -267,7 +286,7 @@ class FeedbackTemplate3
 
                 }
                 case '#555555':{
-                    if(strpos($obj->style, '/*feed_bg*/',0)!==false) {
+                    if(strpos($obj->style, '/*service_bg*/',0)!==false) {
 
                         $bgAbout  = [$colors->mainBg, $colors->thirdBg];
                         $index = rand(0, 1);
@@ -279,7 +298,7 @@ class FeedbackTemplate3
                 }
                 default : {
 
-                    if(strpos($obj->style, '/*feed_bg*/',0)!==false) {
+                    if(strpos($obj->style, '/*service_bg*/',0)!==false) {
 
                         $bgAbout  = ['#555555', $colors->thirdBg];
                         $index = rand(0, 1);
@@ -298,8 +317,8 @@ class FeedbackTemplate3
             $bgColor = $bgAbout[$index];
         }
 
-        if(strpos($obj->style, '/*feed_bg*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*feed_bg*/', 'background-color: ' . $bgColor . ';');
+        if(strpos($obj->style, '/*service_bg*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*service_bg*/', 'background-color: ' . $bgColor . ';');
         }
         $obj->set->lastSectionColor = $bgColor;
 
@@ -310,4 +329,8 @@ class FeedbackTemplate3
 
 
     }
+
+
+
+
 }

@@ -4,15 +4,18 @@
 namespace Application\Core\Feedback\templates\template1;
 
 
+use Application\Core\JsLibs\JsLibs;
 use Application\Services\UtilsService;
 
 class FeedbackTemplate1
 {
     public $utilsService;
+    public $jsLibs;
 
     public function __construct()
     {
         $this->utilsService = new UtilsService();
+        $this->jsLibs = new JsLibs();
     }
     public function setUniqueStyle($styleString, $htmlString, $jsString, $colors, $set){
 
@@ -34,9 +37,29 @@ class FeedbackTemplate1
             $obj = $this->setDarkColorStyle($obj, $colors);
         }
 
+        $obj = $this->setJs($obj);
 
         return $obj;
     }
+
+    public function setJs($obj){
+
+        if(isset($obj->set->getSliderOfOneItem)){
+            if(strpos($obj->js, '//js_code_feedback',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', 'sliderOneSlide(".feedback-slider-item", "horisontal", ".feedback-prev-btn", ".feedback-next-btn");');
+            }
+        }
+        else{
+            $obj->set->getSliderOfOneItem = true;
+            if(strpos($obj->js, '//js_code_feedback',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', $this->jsLibs->getJsLib('getSliderOfOneItem').'sliderOneSlide(".feedback-slider-item", "horisontal", ".feedback-prev-btn", ".feedback-next-btn");');
+            }
+        }
+
+        return $obj;
+
+    }
+
 
     public function setColorsForChildInLightBlock($obj, $colors){
         if(strpos($obj->js, '/*feedback_h_c*/',0)!==false){

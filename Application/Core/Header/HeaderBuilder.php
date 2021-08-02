@@ -26,7 +26,7 @@ class HeaderBuilder
     public function getHeaderTemplate($id, $colors, $fonts, $spaces, $theme){
 
         $headerId = $this->getHeaderByRubricIdAction($id);
-        $headerId = 2;
+        //$headerId = 3;
         $pathToTemplate = '../Application/Core/Header/templates/template'.$headerId;
 
         $styleFile = $pathToTemplate."/style.css";

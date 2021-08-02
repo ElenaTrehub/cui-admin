@@ -1,19 +1,15 @@
 .main{
-    padding-top: 60px;
     width: 100%;
     position: relative;
-    overflow: hidden;
-    background-color: #333333;
-
 }
 .main-slider{
-    margin-top: -60px;
     width: 100%;
 }
 
 
 .main-slider-item{
     position: relative;
+    max-height: 600px;
 }
 .main-slider-item:before{
     position: absolute;
@@ -27,6 +23,8 @@
 }
 .main-slider-item img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .main-middle{
@@ -91,7 +89,6 @@
     margin-right: 0;
 }
 .main-text{
-    width: 60%;
     margin: 0 auto 2vh auto;
     /*m_t_fz*/
     text-align: center;
@@ -108,15 +105,24 @@
     margin-bottom: 2vh;
 }
 
-
-
-
-
-
-
-
-
-
 @media (max-width: 991px) {
 
+    .main-slider-item{
+        min-height: 400px;
+        max-height: 500px;
+    }
+}
+@media (max-width: 768px) {
+
+    .main-slider-item{
+        min-height: 280px;
+        max-height: 450px;
+    }
+}
+@media (max-width: 576px) {
+
+    .main-slider-item{
+        min-height: 220px;
+        max-height: 280px;
+    }
 }

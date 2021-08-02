@@ -4,15 +4,18 @@
 namespace Application\Core\Feedback\templates\template2;
 
 
+use Application\Core\JsLibs\JsLibs;
 use Application\Services\UtilsService;
 
 class FeedbackTemplate2
 {
     public $utilsService;
+    public $jsLibs;
 
     public function __construct()
     {
         $this->utilsService = new UtilsService();
+        $this->jsLibs = new JsLibs();
     }
     public function setUniqueStyle($styleString, $htmlString, $jsString, $colors, $set){
 
@@ -33,7 +36,7 @@ class FeedbackTemplate2
         else{
             $obj = $this->setDarkColorStyle($obj, $colors);
         }
-
+        $obj = $this->setJs($obj);
 
         return $obj;
     }
@@ -80,7 +83,23 @@ class FeedbackTemplate2
         }
     }
 
+    public function setJs($obj){
 
+        if(isset($obj->set->getSliderOfThreeItems)){
+            if(strpos($obj->js, '//js_code_feedback',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', 'slidesThreeSlider(".feedback-slider-item", ".feedback-wrapper", ".feedback-slider", ".feedback-prev-btn", ".feedback-next-btn");');
+            }
+        }
+        else{
+            $obj->set->getSliderOfThreeItems = true;
+            if(strpos($obj->js, '//js_code_feedback',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', $this->jsLibs->getJsLib('getSliderOfThreeItems').'slidesThreeSlider(".feedback-slider-item", ".feedback-wrapper", ".feedback-slider", ".feedback-prev-btn", ".feedback-next-btn");');
+            }
+        }
+
+        return $obj;
+
+    }
 
 
     public function setColorStyle($obj, $colors){

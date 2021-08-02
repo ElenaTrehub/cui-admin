@@ -11,6 +11,7 @@ use Application\Core\Feedback\FeedbackBuilder;
 use Application\Core\Font\FontBuilder;
 use Application\Core\GlobalStyle\GlobalStyleBuilder;
 use Application\Core\Header\HeaderBuilder;
+use Application\Core\Service\ServiceBuilder;
 use Application\Core\Slider\SliderBuilder;
 use Application\Core\Space\SpaceBuilder;
 
@@ -27,6 +28,7 @@ class Builder
     public $sliderBuilder;
     public $aboutBuilder;
     public $featureBuilder;
+    public $serviceBuilder;
     public $feedbackBuilder;
 
     public function __construct()
@@ -40,6 +42,7 @@ class Builder
         $this->sliderBuilder = new SliderBuilder();
         $this->aboutBuilder = new AboutBuilder();
         $this->featureBuilder = new FeatureBuilder();
+        $this->serviceBuilder = new ServiceBuilder();
         $this->feedbackBuilder = new FeedbackBuilder();
     }
     public function getTemplateObjCore($id): \stdClass
@@ -62,13 +65,16 @@ class Builder
 
         $featureObj = $this->featureBuilder->getFeatureTemplate($id, $colors, $fonts, $spaces, $aboutObj->set);
 
+
+
         $feedbackObj = $this->feedbackBuilder->getFeedbackTemplate($id, $colors, $fonts, $spaces, $featureObj->set);
+        $serviceObj = $this->serviceBuilder->getServiceTemplate($id, $colors, $fonts, $spaces, $feedbackObj->set);
 
         $globalStyle = $this->globalStyleBuilder->getGlobalStyle($fonts, $spaces, $colors);
 
-        $html = $headerObj->html.$sliderObj->html.$aboutObj->html.$featureObj->html.$feedbackObj->html;
-        $css = $headerObj->css.$sliderObj->css.$aboutObj->css.$featureObj->css.$feedbackObj->css;
-        $js = '(function() { "use strict"'.$headerObj->js.$sliderObj->js.$aboutObj->js.$featureObj->js.$feedbackObj->js.'new WOW().init();})();';
+        $html = $headerObj->html.$sliderObj->html.$aboutObj->html.$featureObj->html.$feedbackObj->html.$serviceObj->html;
+        $css = $headerObj->css.$sliderObj->css.$aboutObj->css.$featureObj->css.$feedbackObj->css.$serviceObj->css;
+        $js = '(function() { "use strict"'.$headerObj->js.$sliderObj->js.$aboutObj->js.$featureObj->js.$feedbackObj->js.$serviceObj->js.'new WOW().init();})();';
         $fontLink = $fonts->link;
 
         $iframe = new \stdClass();

@@ -2,9 +2,9 @@
     width: 100%;
     overflow: hidden;
     position: relative;
+    background-color: #333333;
 }
-
-
+/*main_wrapper*/
 
 .main-slider-btn_group {
     position: absolute;
@@ -61,11 +61,13 @@
 
 .main-slider-item{
     width: 100%;
+    max-height: 600px;
     position: relative;
 }
 .main-slider-item img{
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 .main-slider-text{
     position: absolute;
@@ -108,18 +110,17 @@
     .main-text{
         line-height: 20px;
     }
-
+    .main-slider-item{
+        min-height: 400px;
+        max-height: 500px;
+    }
 }
 @media (max-width: 768px) {
     .text-wrapper{
         padding: 0;
-        background-color: transparent;
-
     }
     .main-heading{
         margin-bottom: 15px;
-        text-align: center;
-
     }
 
     .main-text{
@@ -132,8 +133,16 @@
     .main-slider-btn{
         padding: 0 20px;
     }
+    .main-slider-item{
+        min-height: 280px;
+        max-height: 450px;
+    }
 }
-@media (max-width: 560px) {
+@media (max-width: 576px) {
 
-
+    .main-slider-item{
+        min-height: 220px;
+        max-height: 280px;
+    }
 }
+

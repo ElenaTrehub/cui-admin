@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Application\Core\About;
+namespace Application\Core\Contact;
 
 
 use Application\Services\AboutService;
 use Application\Services\UtilsService;
 
-class AboutBuilder
+class ContactBuilder
 {
     public $utilsService;
     public $sliderService;

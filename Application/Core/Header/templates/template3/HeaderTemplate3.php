@@ -171,7 +171,7 @@ class HeaderTemplate3
                 $bgMain = [ $colors->mainBg,  $colors->thirdBg];
                 $index = rand(0, 1);
 
-                if($this->currentSettings->position == 'fixed'){
+                if($obj->set->position == 'fixed'){
 
                     //$index = rand(0, 1);
 

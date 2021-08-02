@@ -40,6 +40,45 @@ class SliderTemplate3
         return $obj;
     }
 
+    public function setColorsForChildInLightBlock($obj, $colors, $id){
+        if(strpos($obj->html, '<!--im_s_1-->',0)!==false){
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_s_1-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/light/slide-2.jpg" alt="slide">');
+        }
+
+        if(strpos($obj->style, '/*t_w_bg*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*t_w_bg*/', 'background-color: rgba(80, 80, 80, .5);');
+
+        }
+
+        if(strpos($obj->style, '/*star_color*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*star_color*/', 'color: '.$colors->thirdBg.';');
+
+        }
+
+
+        $obj->set->lastSectionColor = 'light';
+    }
+
+    public function setColorsForChildInDarkBlock($obj, $colors, $id){
+        if(strpos($obj->html, '<!--im_s_1-->',0)!==false){
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_s_1-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/dark/slide-2.jpg" alt="slide">');
+        }
+
+
+        if(strpos($obj->style, '/*t_w_bg*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*t_w_bg*/', 'background-color: rgba(0, 0, 0, .42);');
+
+        }
+        if(strpos($obj->style, '/*star_color*/',0)!==false){
+            $obj->style = $this->utilsService->parseStyle($obj->style, '/*star_color*/', 'color: '.$colors->secondBg.';');
+
+        }
+
+
+        $obj->set->lastSectionColor = 'dark';
+    }
+
+
     public function setColorStyle($obj, $colors, $id){
 
 
@@ -54,43 +93,12 @@ class SliderTemplate3
 
         if($obj->set->lastSectionColor === 'dark'){
 
-            if(strpos($obj->html, '<!--im_s_1-->',0)!==false){
-                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_s_1-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/light/slide-2.jpg" alt="slide">');
-            }
-
-            if(strpos($obj->style, '/*t_w_bg*/',0)!==false){
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*t_w_bg*/', 'background-color: rgba(80, 80, 80, .5);');
-
-            }
-
-            if(strpos($obj->style, '/*star_color*/',0)!==false){
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*star_color*/', 'color: '.$colors->thirdBg.';');
-
-            }
-
-
-            $obj->set->lastSectionColor = 'light';
-
+            $this->setColorsForChildInLightBlock($obj, $colors, $id);
 
         }
         else{
-            if(strpos($obj->html, '<!--im_s_1-->',0)!==false){
-                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_s_1-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/dark/slide-2.jpg" alt="slide">');
-            }
 
-
-            if(strpos($obj->style, '/*t_w_bg*/',0)!==false){
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*t_w_bg*/', 'background-color: rgba(0, 0, 0, .42);');
-
-            }
-            if(strpos($obj->style, '/*star_color*/',0)!==false){
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*star_color*/', 'color: '.$colors->secondBg.';');
-
-            }
-
-
-            $obj->set->lastSectionColor = 'dark';
-
+            $this->setColorsForChildInDarkBlock($obj, $colors, $id);
         }
 
 
@@ -116,23 +124,8 @@ class SliderTemplate3
 
         }
 
+        $this->setColorsForChildInLightBlock($obj, $colors, $id);
 
-            if(strpos($obj->html, '<!--im_s_1-->',0)!==false){
-                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_s_1-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/light/slide-2.jpg" alt="slide">');
-            }
-
-            if(strpos($obj->style, '/*t_w_bg*/',0)!==false){
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*t_w_bg*/', 'background-color: rgba(80, 80, 80, .5);');
-
-            }
-
-            if(strpos($obj->style, '/*star_color*/',0)!==false){
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*star_color*/', 'color: '.$colors->thirdBg.';');
-
-            }
-
-
-        $obj->set->lastSectionColor = 'light';
         return $obj;
 
     }
@@ -147,29 +140,9 @@ class SliderTemplate3
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*m_t_c*/', 'color: #ffffff;');
 
         }
-
-
-            if(strpos($obj->html, '<!--im_s_1-->',0)!==false){
-                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_s_1-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/dark/slide-2.jpg" alt="slide">');
-            }
-
-
-            if(strpos($obj->style, '/*t_w_bg*/',0)!==false){
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*t_w_bg*/', 'background-color: rgba(0, 0, 0, .42);');
-
-            }
-            if(strpos($obj->style, '/*star_color*/',0)!==false){
-                $obj->style = $this->utilsService->parseStyle($obj->style, '/*star_color*/', 'color: '.$colors->secondBg.';');
-
-            }
-
-
-            $obj->set->lastSectionColor = 'dark';
+        $this->setColorsForChildInDarkBlock($obj, $colors, $id);
 
         return $obj;
-
-
-
 
     }
 

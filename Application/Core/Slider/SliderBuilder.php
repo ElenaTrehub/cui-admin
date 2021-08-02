@@ -25,7 +25,7 @@ class SliderBuilder
     public function getSliderTemplate($id, $colors, $fonts, $spaces, $set){
 
         $sliderId = $this->getSliderByRubricIdAction($id);
-        $sliderId =1 ;
+        //$sliderId = 2;
         $pathToTemplate = '../Application/Core/Slider/templates/template'.$sliderId;
 
 
