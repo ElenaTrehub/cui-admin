@@ -1,0 +1,59 @@
+.feedback {
+
+    /*feed_bg*/
+    padding: 40px 0;
+}
+.feedback-wrapper{
+    overflow: hidden;
+    position: relative;
+}
+
+.feedback-title{
+    text-align: center;
+
+}
+.feedback-slider{
+
+}
+.feedback-slider-item {
+    padding: 0 25px 20px 25px;
+    box-sizing: border-box;
+}
+.feedback-heading {
+    font-size: 48px;
+    line-height: 36px;
+    text-align: left;
+    margin-top: 45px;
+    font-weight: bold;
+    /*feed_h_c*/
+}
+
+.feedback-text {
+    text-align: left;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    /*f_text_fz*/
+    /*feed_t_c*/
+}
+
+.feedback-signature {
+    text-align: left;
+    /*f_sign_fz*/
+    /*feed_s_c*/
+}
+
+.feedback-slider-btn_group {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+.feedback-prev-btn, .feedback-next-btn{
+    margin: 0 20px;
+}

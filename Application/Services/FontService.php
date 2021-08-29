@@ -6,6 +6,17 @@ use Application\Utils\MySQL;
 
 class FontService
 {
+    public function getFonts(){
+
+        $stm = MySQL::$db->prepare("SELECT * FROM fonts");
+
+        $stm->execute();
+
+        $fonts = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        return $fonts;
+    }
+
     public function getFontById($id){
 
 

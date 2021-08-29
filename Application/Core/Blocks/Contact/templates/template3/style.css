@@ -1,0 +1,75 @@
+.contact {
+    /*contact_bg*/
+}
+.contact-title{
+    text-align: center;
+}
+.contact-content{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.contact-info__item{
+    margin-bottom: 20px;
+}
+.contact-content__text{
+    text-align: left;
+    padding-right: 20px;
+    margin-bottom: 30px;
+    /*contact_content_fz*/
+    /*contact_content_c*/
+}
+.contact-info__item p{
+    /*contact_info_fz*/
+    /*contact_info_c*/
+}
+.contact-info__item span{
+    width: 100%;
+    display: block;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+    /*contact_span_border*/
+    /*contact_span_c*/
+}
+.contact .input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.contact input{
+    width: 48%;
+    margin-bottom: 30px;
+}
+.contact textarea{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
+
+.contact .button-order {
+    margin-top: 1rem;
+}
+
+.contact-info__item i{
+
+    font-size: 20px;
+    /*contact_icon_c*/
+    margin-right: 10px;
+}
+
+.fa-map-marker-alt:before {
+    content: "\f3c5"; }
+.fa-phone-volume:before {
+    content: "\f2a0"; }
+.fa-envelope:before {
+    content: "\f0e0"; }
+.fa-calendar-alt:before {
+    content: "\f073"; }
+.fa-mug-hot:before {
+    content: "\f7b6"; }
+
+.fa-comment-dollar:before {
+    content: "\f651"; }
+

@@ -1,0 +1,29 @@
+.contact {
+    /*contact_bg*/
+}
+.contact-title{
+    text-align: center;
+}
+.contact .input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.contact input {
+    width: 30%;
+    margin-bottom: 3rem;
+}
+
+.contact .input-text {
+    display: block;
+    width: 100%;
+}
+.contact .button-order {
+    margin-top: 1rem;
+}
+
+@media (max-width: 991px) {
+    .contact input {
+        width: 100%;
+    }
+}

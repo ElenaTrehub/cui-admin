@@ -4,7 +4,9 @@ return array(
 
     'get' => [
         '/rubrics' => 'RubricController@rubricListAction',
-        '/iframe/(\d+)' => 'IframeController@getTemplateByRubricIdAction',
+        '/landing/(\d+)' => 'IframeController@getLandingByRubricIdAction',
+        '/manyPage/(\d+)' => 'IframeController@getManyPageSiteByRubricIdAction',
+        '/fonts' => 'FontController@fontListAction',
         //'/' => 'RubricController@rubricAction',
     ],
     'post' => [

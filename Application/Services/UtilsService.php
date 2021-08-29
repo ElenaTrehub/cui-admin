@@ -30,4 +30,24 @@ class UtilsService
         return $style;
     }
 
+    public function setLandingSectionName($htmlString, $idStr){
+
+        $idStr = lcfirst($idStr);
+        $str = "<section id='{$idStr}' class='{$idStr} section'>";
+
+        if(strpos($htmlString, '<!--nameSection-->',0)!==false){
+            $htmlString = $this->parseStyle($htmlString, '<!--nameSection-->', $str);
+        }
+        return $htmlString;
+    }
+
+    public function setManyPageSectionName($htmlString, $idStr){
+        $idStr = lcfirst($idStr);
+        $str = "<section class='{$idStr} section'>";
+
+        if(strpos($htmlString, '<!--nameSection-->',0)!==false){
+            $htmlString = $this->parseStyle($htmlString, '<!--nameSection-->', $str);
+        }
+        return $htmlString;
+    }
 }

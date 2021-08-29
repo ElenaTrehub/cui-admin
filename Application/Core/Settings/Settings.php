@@ -9,14 +9,45 @@ use Application\Services\UtilsService;
 class Settings
 {
     public $photoDir;
+    public $siteMenu;
+    public $landingMenu;
+    public $translateForMenu;
 
     public function __construct()
     {
         $this->photoDir = [
            6 => 'auto'
         ];
+
+        $this->siteMenu = [
+            //6 => ['Index'=>[], 'About'=>[], 'Service'=>['Service1'=>[], 'Service2'=>[]], 'Contact'=>[]]
+            6 => ['Index'=>[], 'About'=>['Service'=>[]]]
+        ];
+
+        $this->landingMenu = [
+            6 => ['Index', 'About', 'Feature', 'Service', 'Feedback', 'Contact']
+        ];
+
+        $this->translateForMenu = [
+            'Index'=>['ru'=> 'Главная', 'en'=>'Main'],
+            'About'=>['ru'=> 'О нас', 'en'=>'About'],
+            'Feature'=>['ru'=> 'Преимущества', 'en'=>'Feature'],
+            'Service'=>['ru'=> 'Наши услуги', 'en'=>'Service'],
+            'ServiceSingle'=>['ru'=> 'Услуга', 'en'=>'Service'],
+            'Feedback'=>['ru'=> 'Отзывы', 'en'=>'Feedback'],
+            'Contact'=>['ru'=> 'Контакты', 'en'=>'Contact']
+        ];
     }
     public function getPhotoFolderName($rubricId){
         return $this->photoDir[$rubricId];
+    }
+    public function getSiteMenu($rubricId){
+        return $this->siteMenu[$rubricId];
+    }
+    public function getLandingMenu($rubricId){
+        return $this->landingMenu[$rubricId];
+    }
+    public function getTranslateForMenu($page, $lang){
+        return $this->translateForMenu[$page][$lang];
     }
 }

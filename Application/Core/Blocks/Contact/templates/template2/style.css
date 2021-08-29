@@ -1,0 +1,42 @@
+.contact {
+    /*contact_bg*/
+}
+.contact-title{
+    text-align: center;
+}
+.contact-content{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.contact-content__text{
+    text-align: left;
+    padding-right: 20px;
+    margin-bottom: 30px;
+    /*contact_content_fz*/
+    /*contact_content_c*/
+}
+.contact-content__info p{
+    margin-bottom: 20px;
+    /*contact_info_fz*/
+    /*contact_info_c*/
+}
+.contact-content__info span{
+    /*contact_span_c*/
+}
+.contact .input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.contact input {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
+.contact .button-order {
+    margin-top: 1rem;
+}
+
+
