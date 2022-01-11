@@ -1,22 +1,12 @@
+/*main-start*/
 .main{
     width: 100%;
     position: relative;
-    background-color: #333333;
-
 }
-/*main_wrapper*/
-.main-slider-btn_group {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: 130;
-    right: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
+.main-slider{
+    width: 100%;
 }
+
 
 .main-slider-item{
     position: relative;
@@ -52,26 +42,55 @@
 }
 .main-wrapper{
 
-    margin-left: 13vw;
+    padding-left: 13vw;
     padding: 0;
 
 
 }
-.carousel-indicators{
-    position: absolute;
-    right: 0;
-    bottom: 15px;
-    left: 0;
-    z-index: 150;
+.star{
+    width: 300px;
+    position: relative;
+    padding: 0 100px;
     display: flex;
     justify-content: center;
-    margin: 0 auto;
-    list-style: none;
+    align-items: center;
+    margin: 0 auto 2vh auto;
 }
-/*dots_style*/
+.star-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.star:before{
+    position: absolute;
+    content: '';
+    width: 50px;
+    height: 1px;
+    left: 0;
+    top: 50%;
+    bottom: 0;
+    background-color: #fff;
+}
+.star:after{
+    position: absolute;
+    content: '';
+    width: 50px;
+    height: 1px;
+    right: 0;
+    top: 50%;
+    bottom: 0;
+    background-color: #fff;
+}
+.star-wrapper span{
+    /*star_color*/
+    margin-right: 15px;
+}
+.star-wrapper span:last-child{
+    margin-right: 0;
+}
 .main-text{
-    /*m_t_fz*/
-    text-align: left;
+    margin: 0 auto 2vh auto;
+    text-align: center;
     padding-bottom: 20px;
     /*m_t_c*/
     font-style: italic;
@@ -79,13 +98,14 @@
 }
 .main-heading{
 
-    /*m_h_fz*/
+
     /*m_h_c*/
-    text-align: left;
+    text-align: center;
     margin-bottom: 2vh;
 }
 
 @media (max-width: 991px) {
+
     .main-slider-item{
         min-height: 400px;
         max-height: 500px;
@@ -105,3 +125,4 @@
         max-height: 280px;
     }
 }
+/*main-end*/

@@ -19,6 +19,17 @@ class ServicePageService
 
         return $servicePage;
     }
+    public function getServicePageByIdAndStyle($id, $style){
+
+        $stm = MySQL::$db->prepare("SELECT * FROM servicepage WHERE idServicePage = :id AND style = :styleStr");
+        $stm->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stm->bindParam(':styleStr', $style, \PDO::PARAM_STR);
+        $stm->execute();
+
+        $servicePage = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        return $servicePage;
+    }
     public function getServicePageByRubricId($id){
 
         $stm = MySQL::$db->prepare(

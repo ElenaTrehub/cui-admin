@@ -1,3 +1,4 @@
+/*feature-start*/
 .feature{
     width: 100%;
     /*f_bg*/
@@ -25,11 +26,12 @@
     /*i_bg*/
     /*i_f_c*/
     margin-bottom: 20px;
+
 }
+
 
 .feature-item__title{
     /*f_t_c*/
-    /*f_z_fit*/
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 15px;
@@ -38,19 +40,9 @@
 
 .feature-item__text{
     font-weight: 400;
-    /*f_text_fz*/
     /*f_text_c*/
     line-height: 20px;
     text-align: center;
 }
-
-
-.fa-bullhorn:before {
-    content: "\f0a1"; }
-.fa-comment-dollar:before {
-    content: "\f651"; }
-.fa-mail-bulk:before {
-    content: "\f674"; }
-.fa-atom:before {
-    content: "\f5d2"; }
+/*feature-end*/
 

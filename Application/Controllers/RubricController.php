@@ -2,7 +2,7 @@
 
 
 namespace Application\Controllers;
-
+session_start();
 
 use Application\Services\RubricService;
 

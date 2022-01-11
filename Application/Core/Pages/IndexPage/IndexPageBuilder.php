@@ -18,9 +18,9 @@ class IndexPageBuilder
         $this->indexPageService = new IndexPageService();
     }
 
-    public function getPageTemplate($id, $settings, $idStr, $isLanding){
+    public function getPageTemplate($id, $style, $settings, $idStr, $isLanding){
 
-        $indexPageId = $this->getIndexPageByRubricIdAction($id);
+        $indexPageId = $this->getIndexPageByRubricIdAction($id, $style);
 
         $indexPageId = 1;
         $pathToTemplate = '../Application/Core/Pages/IndexPage/templates/template'.$indexPageId;
@@ -41,7 +41,7 @@ class IndexPageBuilder
 
 
 
-            $obj = $this->setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding);
+            $obj = $this->setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding, $style);
 
 
 
@@ -59,15 +59,28 @@ class IndexPageBuilder
 
 
 
-    public function getIndexPageByRubricIdAction($id){
+    public function getIndexPageByRubricIdAction($id, $style){
 
         $indexPages = $this->indexPageService->getIndexPageByRubricId($id);
 
 
         $indexPagesArray = [];
         foreach ($indexPages as $key=>$item){
-            $nextIndexPage = $this->indexPageService->getIndexPageById($item->idIndexPage)[0];
-            $indexPagesArray[] = $nextIndexPage;
+            if($style === 'all'){
+                $nextIndexPage = $this->indexPageService->getIndexPageById($item->idIndexPage)[0];
+            }
+            else{
+
+                $nextIndexPage = $this->indexPageService->getIndexPageByIdAndStyle($item->idIndexPage, $style)[0];
+            }
+            if(count($nextIndexPage)>0){
+                $indexPagesArray[] = $nextIndexPage;
+            }
+
+
+
+
+
         }
 
 
@@ -91,11 +104,11 @@ class IndexPageBuilder
 
 
 
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding, $style){
 
         $uniqueStyleBuilder = new $UniqueStyleBuilder();
 
-        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding);
+        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding, $style);
 
     }
 }

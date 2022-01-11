@@ -1,3 +1,4 @@
+/*main-start*/
 .main{
     width: 100%;
     overflow: hidden;
@@ -69,7 +70,7 @@
 
 }
 .main-heading{
-    /*m_h_fz*/
+
     font-weight: bold;
     text-transform: uppercase;
     /*m_h_c*/
@@ -79,7 +80,7 @@
 }
 
 .main-text{
-    /*m_t_fz*/
+
     letter-spacing: .1em;
     line-height: 24px;
     /*m_t_c*/
@@ -126,4 +127,4 @@
         max-height: 280px;
     }
 }
-
+/*main-end*/

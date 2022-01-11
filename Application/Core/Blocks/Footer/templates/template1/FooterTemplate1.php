@@ -43,7 +43,7 @@ class FooterTemplate1
 
     public function setColorsForChildInLightBlock($obj, $colors){
         if(strpos($obj->html, '<!--im_footer_logo-->',0)!==false){
-            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_footer_logo-->', '<img src="../images/light-logo.png" alt="">');
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_footer_logo-->', '<img class="footer-logo-img" src="../images/light-logo.png" alt="">');
         }
         if(strpos($obj->style, '/*footer_top_title_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*footer_top_title_c*/', 'color: '.$colors->titleColor.';');
@@ -81,7 +81,7 @@ class FooterTemplate1
 
     public function setColorsForChildInDarkBlock($obj, $colors){
         if(strpos($obj->html, '<!--im_footer_logo-->',0)!==false){
-            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_footer_logo-->', '<img src="../images/black-logo.png" alt="">');
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_footer_logo-->', '<img class="footer-logo-img" src="../images/black-logo.png" alt="">');
         }
         if(strpos($obj->style, '/*footer_top_title_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*footer_top_title_c*/', 'color: '.$colors->anyTextColor.';');

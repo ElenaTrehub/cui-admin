@@ -17,9 +17,9 @@ class FeedbackBuilder
         $this->feedbackService = new FeedbackService();
     }
 
-    public function getTemplate($id, $settings, $idStr, $isLanding, $userFeedbackId = null){
+    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userFeedbackId = null){
 
-        $feedbackId = is_null($userFeedbackId) ? $this->getFeedbackByRubricIdAction($id) : $userFeedbackId;
+        $feedbackId = is_null($userFeedbackId) ? $this->getFeedbackByRubricIdAction($id, $style) : $userFeedbackId;
 
         //$feedbackId = 3;
         $pathToTemplate = '../Application/Core/Blocks/Feedback/templates/template'.$feedbackId;
@@ -62,16 +62,49 @@ class FeedbackBuilder
 
 
     }
+    public function getSectionsByName($id, $styleName){
 
-    public function getFeedbackByRubricIdAction($id){
+        $feedbacks = $this->feedbackService->getFeedbacksByRubricId($id);
+
+        $feedbacksArray = [];
+        foreach ($feedbacks as $key=>$item){
+
+            $nextFeedback = $this->feedbackService->getFeedbackById($item->idFeedback)[0];
+
+            if(count($nextFeedback)>0){
+                $feedbacksArray[] = $nextFeedback;
+            }
+
+        }
+
+        $feedbacksStyleArray = [];
+
+        foreach($feedbacksArray as $key=>$feedback){
+            if($feedback->style === $styleName){
+                $feedbacksStyleArray[]= $feedback;
+            }
+        }
+
+        return $feedbacksStyleArray;
+
+    }
+    public function getFeedbackByRubricIdAction($id, $style){
 
         $feedbacks = $this->feedbackService->getFeedbacksByRubricId($id);
 
 
         $feedbacksArray = [];
         foreach ($feedbacks as $key=>$item){
-            $nextFeedback = $this->feedbackService->getFeedbackById($item->idFeedback)[0];
-            $feedbacksArray[] = $nextFeedback;
+            if($style === 'all'){
+                $nextFeedback = $this->feedbackService->getFeedbackById($item->idFeedback)[0];
+            }
+            else{
+                $nextFeedback = $this->feedbackService->getFeedbackByIdAndStyle($item->idFeedback, $style)[0];
+            }
+            if(count($nextFeedback)>0){
+                $feedbacksArray[] = $nextFeedback;
+            }
+
         }
         $randInt = rand(0, 100);
 
@@ -88,19 +121,6 @@ class FeedbackBuilder
     }
 
     public function setFontStyle($style, $fonts){
-
-        if(strpos($style, '/*f_t_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*f_t_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
-
-        if(strpos($style, '/*f_text_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*f_text_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
-        if(strpos($style, '/*f_sign_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*f_sign_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
-
-
 
         return $style;
     }

@@ -18,9 +18,9 @@ class AboutPageBuilder
         $this->aboutPageService = new AboutPageService();
     }
 
-    public function getPageTemplate($id, $settings, $idStr, $isLanding){
+    public function getPageTemplate($id, $style, $settings, $idStr, $isLanding){
 
-        $aboutPageId = $this->getAboutPageByRubricIdAction($id);
+        $aboutPageId = $this->getAboutPageByRubricIdAction($id, $style);
 
         $aboutPageId = 1;
         $pathToTemplate = '../Application/Core/Pages/AboutPage/templates/template'.$aboutPageId;
@@ -40,7 +40,7 @@ class AboutPageBuilder
             $jsString = file_get_contents($jslFile);
 
 
-            $obj = $this->setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding);
+            $obj = $this->setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding, $style);
 
 
 
@@ -58,15 +58,27 @@ class AboutPageBuilder
 
 
 
-    public function getAboutPageByRubricIdAction($id){
+    public function getAboutPageByRubricIdAction($id, $style){
 
         $aboutPages = $this->aboutPageService->getAboutPageByRubricId($id);
 
 
         $aboutPagesArray = [];
         foreach ($aboutPages as $key=>$item){
-            $nextAboutPage = $this->aboutPageService->getAboutPageById($item->idAboutPage)[0];
-            $aboutPagesArray[] = $nextAboutPage;
+            if($style === 'all'){
+                $nextAboutPage = $this->aboutPageService->getAboutPageById($item->idAboutPage)[0];
+            }
+            else{
+
+                $nextAboutPage = $this->aboutPageService->getAboutPageByIdAndStyle($item->idAboutPage, $style)[0];
+            }
+            if(count($nextAboutPage)>0){
+                $aboutPagesArray[] = $nextAboutPage;
+            }
+
+
+
+
         }
         $randInt = rand(0, 100);
 
@@ -85,11 +97,11 @@ class AboutPageBuilder
 
 
 
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding, $style){
 
         $uniqueStyleBuilder = new $UniqueStyleBuilder();
 
-        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding);
+        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding, $style);
 
     }
 

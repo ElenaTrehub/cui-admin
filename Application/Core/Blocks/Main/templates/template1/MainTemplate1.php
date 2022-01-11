@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Application\Core\Blocks\Slider\templates\template1;
+namespace Application\Core\Blocks\Main\templates\template1;
 
 
 use Application\Core\JsLibs\JsLibs;
 use Application\Core\Settings\Settings;
 use Application\Services\UtilsService;
 
-class SliderTemplate1
+class MainTemplate1
 {
     public $utilsService;
     public $settings;

@@ -32,4 +32,16 @@ class FooterService
 
         return $footer;
     }
+    public function getFooterByIdAndStyle($id, $style){
+
+        $stm = MySQL::$db->prepare("SELECT * FROM footer WHERE idFooter = :id AND style = :styleStr");
+        $stm->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stm->bindParam(':styleStr', $style, \PDO::PARAM_STR);
+
+        $stm->execute();
+
+        $footer = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        return $footer;
+    }
 }

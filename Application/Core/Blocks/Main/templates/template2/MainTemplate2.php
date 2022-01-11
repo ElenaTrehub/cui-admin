@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Application\Core\Blocks\Slider\templates\template2;
+namespace Application\Core\Blocks\Main\templates\template2;
 
 
 use Application\Core\JsLibs\JsLibs;
 use Application\Core\Settings\Settings;
 use Application\Services\UtilsService;
 
-class SliderTemplate2
+class MainTemplate2
 {
     public $utilsService;
     public $settings;
@@ -27,7 +27,6 @@ class SliderTemplate2
         $obj->style = $styleString;
         $obj->js = $jsString;
         $obj->set = $settings;
-
 
         if($obj->set->theme == 'normal'){
             $obj = $this->setColorStyle($obj, $settings->colors, $id);

@@ -57,7 +57,17 @@ class ContactTemplate2
                 $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_contact', $this->jsLibs->getJsLib('getMask').'mask(\'[name="phone"]\');');
             }
         }
-
+        if(isset($obj->set->formSend)){
+            if(strpos($obj->js, '//js_code_send',0)!==false){
+                $obj->js += $this->utilsService->parseStyle($obj->js, '//js_code_send', 'formSend("form");');
+            }
+        }
+        else{
+            $obj->set->formSend = true;
+            if(strpos($obj->js, '//js_code_send',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_send', $this->jsLibs->getJsLib('formSend').'formSend("form");');
+            }
+        }
         return $obj;
 
     }

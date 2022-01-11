@@ -44,7 +44,9 @@ class BaseController
     protected function json(  $data ){
 
         header('Access-Control-Allow-Origin: http://cui-admin:1252');
+
         header('Content-type: application/json');
+
         echo json_encode($data); //  res.send();
         exit();
 

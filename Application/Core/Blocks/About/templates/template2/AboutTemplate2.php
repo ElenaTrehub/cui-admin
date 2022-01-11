@@ -43,7 +43,7 @@ class AboutTemplate2
 
     public function setPhoto($obj, $id){
         if(strpos($obj->html, '<!--im_about-->',0)!==false){
-            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_about-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/about.jpg" alt="about">');
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_about-->', '<img class="about-img" src="../images/'.$this->settings->getPhotoFolderName($id).'/about.jpg" alt="about">');
         }
         return $obj;
     }
@@ -53,10 +53,7 @@ class AboutTemplate2
             $obj->js = $this->utilsService->parseStyle($obj->js, '/*a_h_c*/', 'aboutTitle.classList.add("title-light");');
 
         }
-        if(strpos($obj->style, '/*a_h3_c*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_h3_c*/', 'color:'.$colors->textColor.';');
 
-        }
         if(strpos($obj->style, '/*a_h3_fz*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_h3_fz*/', 'font-size:'.$fonts->textSize.';');
 
@@ -65,18 +62,12 @@ class AboutTemplate2
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_h2_c*/', 'color:'.$colors->anyTextColor.';');
 
         }
-        if(strpos($obj->style, '/*a_h2_fz*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_h2_fz*/', 'font-size:'.$fonts->h3Size.';');
 
-        }
         if(strpos($obj->style, '/*a_t_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_t_c*/', 'color: '.$colors->textColor.';');
 
         }
-        if(strpos($obj->style, '/*a_t_fz*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_t_fz*/', 'font-size:'.$fonts->linkSize.';');
 
-        }
         if(strpos($obj->style, '/*a_f_b_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_f_b_c*/', 'color: '.$colors->anyTextColor.';');
 
@@ -96,26 +87,17 @@ class AboutTemplate2
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_h3_c*/', 'color:'.$colors->linkColor.';');
 
         }
-        if(strpos($obj->style, '/*a_h3_fz*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_h3_fz*/', 'font-size:'.$fonts->textSize.';');
 
-        }
         if(strpos($obj->style, '/*a_h2_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_h2_c*/', 'color:'.$colors->anyTextColor.';');
 
         }
-        if(strpos($obj->style, '/*a_h2_fz*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_h2_fz*/', 'font-size:'.$fonts->h3Size.';');
 
-        }
         if(strpos($obj->style, '/*a_t_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_t_c*/', 'color: #ffffff;');
 
         }
-        if(strpos($obj->style, '/*a_t_fz*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_t_fz*/', 'font-size:'.$fonts->linkSize.';');
 
-        }
         if(strpos($obj->style, '/*a_f_b_c*/',0)!==false){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*a_f_b_c*/', 'color: '.$colors->anyTextColor.';');
 

@@ -3,6 +3,7 @@
 
 namespace Application\Core;
 
+session_start();
 
 use Application\Core\Blocks\About\AboutBuilder;
 use Application\Core\Color\ColorBuilder;
@@ -15,7 +16,7 @@ use Application\Core\GlobalStyle\GlobalStyleBuilder;
 use Application\Core\Blocks\Header\HeaderBuilder;
 use Application\Core\Blocks\Scroll\ScrollBuilder;
 use Application\Core\Blocks\Service\ServiceBuilder;
-use Application\Core\Blocks\Slider\SliderBuilder;
+use Application\Core\Blocks\Main\MainBuilder;
 use Application\Core\Pages\AboutPage\AboutPageBuilder;
 use Application\Core\Pages\IndexPage\IndexPageBuilder;
 use Application\Core\Settings\Settings;
@@ -55,7 +56,7 @@ class Builder
         $this->fontBuilder = new FontBuilder();
         $this->spaceBuilder = new SpaceBuilder();
         $this->globalStyleBuilder = new GlobalStyleBuilder();
-        $this->sliderBuilder = new SliderBuilder();
+        $this->sliderBuilder = new MainBuilder();
         //$this->aboutBuilder = new AboutBuilder();
         $this->featureBuilder = new FeatureBuilder();
         $this->serviceBuilder = new ServiceBuilder();
@@ -73,46 +74,55 @@ class Builder
 
     }
 
-    public function getGlobalsettings($id){
+    public function getGlobalsettings($id, $theme){
         $colors = $this->colorBuilder->getColorObj($id);
         $fonts = $this->fontBuilder->getFontObj($id);
         $spaces = $this->spaceBuilder->getSpaceObj($id);
 
-        $themes = ['light', 'normal', 'dark'];
-        $index = rand(0, 2);
-
-        $withBgBlock= ['withBg', 'withoutBg'];
-        $indexBg = rand(0, 1);
-        $indexBg = 0;
 
         $settings = new \stdClass();
-        $settings->theme = $themes[$index];
+
+        if($theme === 'any'){
+            $themes = ['light', 'normal', 'dark'];
+            $index = rand(0, 2);
+
+            $withBgBlock= ['withBg', 'withoutBg'];
+            $indexBg = rand(0, 1);
+            //$indexBg = 0;
+            $settings->theme = $themes[$index];
+        }
+        else{
+            $settings->theme = $theme;
+        }
+
         $settings->withBg = $withBgBlock[$indexBg];
         $settings->colors = $colors;
         $settings->fonts = $fonts;
         $settings->spaces = $spaces;
 
-        return $settings;
+        $_SESSION["settings"] = $settings;
+
+        //return $settings;
     }
-    public function getLandingTemplateObjCore($id): \stdClass
+    public function getLandingTemplateObjCore($id, $style, $theme): \stdClass
     {
 
         $menu = $this->settings->getLandingMenu($id);
-        $settings = $this->getGlobalsettings($id);
+        $this->getGlobalsettings($id, $theme);
 
 
 
 
-        $headerObj = $this->headerBuilder->getTemplate($id, $settings, $menu, true);
-
-        $sliderObj = $this->sliderBuilder->getTemplate($id, $headerObj->set);
+        $headerObj = $this->headerBuilder->getTemplate($id, $style, $_SESSION["settings"], $menu, true);
+        $_SESSION["settings"] = $headerObj->set;
+        $sliderObj = $this->sliderBuilder->getTemplate($id, $style, $_SESSION["settings"], 'main', true);
 
         $childIframe = new \stdClass();
         $childIframe->html = '';
         $childIframe->css = '';
         $childIframe->js = '';
 
-        $currentSettings = $sliderObj->set;
+        $_SESSION["settings"] = $sliderObj->set;
 
         for ($i = 1; $i < count($menu); $i++){
 
@@ -120,30 +130,22 @@ class Builder
 
             $builder = new $builderStr();
 
-            $nextObj = $builder->getTemplate($id, $currentSettings, $menu[$i], true);
+            $nextObj = $builder->getTemplate($id, $style, $_SESSION["settings"], $menu[$i], true);
             $childIframe->html = $childIframe->html.$nextObj->html;
             $childIframe->css = $childIframe->css.$nextObj->css;
             $childIframe->js = $childIframe->js.$nextObj->js;
 
-            $currentSettings = $nextObj->set;
+            $_SESSION["settings"] = $nextObj->set;
 
         }
 
-        //$aboutObj = $this->aboutBuilder->getTemplate($id, $sliderObj->set);
-
-        //$featureObj = $this->featureBuilder->getTemplate($id, $aboutObj->set);
-
-        //$serviceObj = $this->serviceBuilder->getTemplate($id, $featureObj->set);
-
-        //$feedbackObj = $this->feedbackBuilder->getTemplate($id, $serviceObj->set);
-
-        //$contactObj = $this->contactBuilder->getTemplate($id, $feedbackObj->set);
-
-        $footerObj = $this->footerBuilder->getTemplate($id, $currentSettings, $menu, true);
-
+        $footerObj = $this->footerBuilder->getTemplate($id, $style, $_SESSION["settings"], $menu, true);
+        $_SESSION["settings"] = $footerObj->set;
         $scrollObj = $this->scrollBuilder->getTemplate($footerObj->set);
 
-        $globalStyle = $this->globalStyleBuilder->getGlobalStyle($settings->fonts, $settings->spaces, $settings->colors);
+        $globalStyle = $this->globalStyleBuilder->getGlobalStyle($_SESSION["settings"]->fonts, $_SESSION["settings"]->spaces, $_SESSION["settings"]->colors);
+
+        //$globalFontSizeStyle = $this->globalStyleBuilder->getFontSizeStyle($settings->fonts);
 
         $jsStr = "let links = document.querySelectorAll('ul.menu-sitemap li a');
     links.forEach((item) =>{
@@ -164,9 +166,6 @@ class Builder
         $js = '(function() { "use strict"; '.$jsStr.$headerObj->js.$sliderObj->js.$childIframe->js.$footerObj->js.$scrollObj->js.'new WOW().init();})();';
 
 
-        $objFont = new \stdClass();
-        $objFont->name = $settings->fonts->nameFont;
-        $objFont->link = $settings->fonts->link;
 
 
         $iframe = new \stdClass();
@@ -181,21 +180,21 @@ class Builder
         $iframe->html = [$obj];
         $iframe->css = $globalStyle.$css;
         $iframe->script = $js;
-        $iframe->fontStyle = $settings->fonts;
+        $iframe->fontStyle = $_SESSION["settings"]->fonts;
         $iframe->set = $scrollObj->set;
 
         return $iframe;
     }
-    public function getManyPageSiteTemplateObjCore($id): \stdClass
+    public function getManyPageSiteTemplateObjCore($id, $style, $theme): \stdClass
     {
 
         $menu = $this->settings->getSiteMenu($id);
-        $settings = $this->getGlobalsettings($id);
+        $this->getGlobalsettings($id, $theme);
 
-        $headerObj = $this->headerBuilder->getTemplate($id, $settings, $menu, false);
-        $footerObj = $this->footerBuilder->getTemplate($id, $settings, $menu, false);
+        $headerObj = $this->headerBuilder->getTemplate($id, $style, $_SESSION["settings"], $menu, false);
+        $footerObj = $this->footerBuilder->getTemplate($id, $style,  $_SESSION["settings"], $menu, false);
 
-        $sliderObj = $this->sliderBuilder->getTemplate($id, $settings);
+        $sliderObj = $this->sliderBuilder->getTemplate($id, $style, $_SESSION["settings"], 'main', true);
 
 
 
@@ -211,7 +210,7 @@ class Builder
             $builderStr = "Application\Core\Pages\\{$key}Page\\{$key}PageBuilder";
             $builder = new $builderStr();
 
-            $nextPage = $builder->getPageTemplate($id, $settings, $key, false);
+            $nextPage = $builder->getPageTemplate($id, $style, $_SESSION["settings"], $key, false);
             $pagesArray->html  += [$key=>$nextPage->html];
             $pagesArray->css = $pagesArray->css.$nextPage->css;
             $pagesArray->js = $pagesArray->js.$nextPage->js;
@@ -221,10 +220,26 @@ class Builder
                     $builderStr = "Application\Core\Pages\\{$keyInto}Page\\{$keyInto}PageBuilder";
                     $builder = new $builderStr();
 
-                    $nextIntoPage = $builder->getPageTemplate($id, $settings, $keyInto, false);
+                    $nextIntoPage = $builder->getPageTemplate($id, $style, $_SESSION["settings"], $keyInto, false);
                     $pagesArray->html += [$keyInto=>$nextIntoPage->html];
                     $pagesArray->css = $pagesArray->css.$nextIntoPage->css;
                     $pagesArray->js = $pagesArray->js.$nextIntoPage->js;
+
+                    if (count($valueInto) > 0) {
+                        foreach ($valueInto as $keyIntoSecond => $valueIntoSecond) {
+
+                            $builderStr = "Application\Core\Pages\\{$keyIntoSecond}Page\\{$keyIntoSecond}PageBuilder";
+                            $builder = new $builderStr();
+
+                            $nextIntoSecondPage = $builder->getPageTemplate($id, $style, $_SESSION["settings"], $keyIntoSecond, false);
+                            $pagesArray->html += [$keyIntoSecond=>$nextIntoSecondPage->html];
+                            $pagesArray->css = $pagesArray->css.$nextIntoSecondPage->css;
+                            $pagesArray->js = $pagesArray->js.$nextIntoSecondPage->js;
+
+                        }
+                    }
+
+
                 }
             }
 
@@ -236,7 +251,7 @@ class Builder
 
 
         $scrollObj = $this->scrollBuilder->getTemplate($footerObj->set);
-        $globalStyle = $this->globalStyleBuilder->getGlobalStyle($settings->fonts, $settings->spaces, $settings->colors);
+        $globalStyle = $this->globalStyleBuilder->getGlobalStyle($_SESSION["settings"]->fonts, $_SESSION["settings"]->spaces, $_SESSION["settings"]->colors);
 
         $jsStr = "let links = document.querySelectorAll('ul.menu-sitemap li a');
     links.forEach((item) =>{
@@ -263,9 +278,9 @@ class Builder
         $js = '(function() { "use strict"; '.$jsStr.$headerObj->js.$footerObj->js.$sliderObj->js.$pagesArray->js.'new WOW().init();})();';
 
 
-        $objFont = new \stdClass();
-        $objFont->name = $settings->fonts->nameFont;
-        $objFont->link = $settings->fonts->link;
+//        $objFont = new \stdClass();
+//        $objFont->name = $settings->fonts->nameFont;
+//        $objFont->link = $settings->fonts->link;
 
 
         foreach($htmlArray as $key => &$value){
@@ -300,7 +315,7 @@ class Builder
         $iframe->html = $iframeArray;
         $iframe->css = $globalStyle.$css;
         $iframe->script = $js;
-        $iframe->fontStyle = $settings->fonts;
+        $iframe->fontStyle = $_SESSION["settings"]->fonts;
         //$iframe->set = $indexObj->set;
 
         return $iframe;
@@ -340,5 +355,101 @@ class Builder
 
 
         return $html;
+    }
+
+    public function getSectionsByName($id, $sectionName, $styleName){
+        $name = ucfirst($sectionName);
+        $builderStr = "Application\Core\Blocks\\{$name}\\{$name}Builder";
+
+        $builder = new $builderStr();
+
+
+        $nextObj = $builder->getSectionsByName($id, $styleName);
+
+
+        return $nextObj;
+    }
+
+    public function getChooseSection($id, $sectionName, $styleName, $theme, $sectionId, $typeSite){
+        $name = ucfirst($sectionName);
+        $builderStr = "Application\Core\Blocks\\{$name}\\{$name}Builder";
+
+
+        $builder = new $builderStr();
+        if (isset($_SESSION['settings'])) {
+            $currentSettings = $_SESSION['settings'];
+        }
+        else{
+            $this->getGlobalsettings($id, $theme);
+            $currentSettings = $_SESSION['settings'];
+        }
+
+        if($sectionName === 'header' || $sectionName === 'footer'){
+            if($typeSite === 'landing'){
+                $menu = $this->settings->getLandingMenu($id);
+                $nextObj = $builder->getTemplate($id, $styleName, $currentSettings, $menu, true, $sectionId);
+            }
+            else{
+                $menu = $this->settings->getSiteMenu($id);
+                $nextObj = $builder->getTemplate($id, $styleName, $currentSettings, $menu, false, $sectionId);
+            }
+
+
+        }
+        else{
+            $nextObj = $builder->getTemplate($id, $styleName, $currentSettings, $sectionName, true, $sectionId);
+        }
+
+
+
+
+        return $nextObj;
+    }
+
+    public function getAddSection($id, $sectionName, $styleName, $typeSite, $theme){
+
+        $name = ucfirst($sectionName);
+        $builderStr = "Application\Core\Blocks\\{$name}\\{$name}Builder";
+        //return session_id();
+        return $_SESSION['settings'];
+        $builder = new $builderStr();
+        if (isset($_SESSION['settings'])) {
+            $currentSettings = $_SESSION['settings'];
+
+        }
+        else{
+            $this->getGlobalsettings($id, $theme);
+            $currentSettings = $_SESSION['settings'];
+        }
+
+
+
+        if($sectionName === 'header' || $sectionName === 'footer'){
+            if($typeSite === 'landing'){
+                $menu = $this->settings->getLandingMenu($id);
+                $nextObj = $builder->getTemplate($id, $styleName, $currentSettings, $menu, true);
+            }
+            else{
+                $menu = $this->settings->getSiteMenu($id);
+                $nextObj = $builder->getTemplate($id, $styleName, $currentSettings, $menu, false);
+            }
+
+
+        }
+        else{
+            $nextObj = $builder->getTemplate($id, $styleName, $currentSettings, $sectionName, true);
+
+        }
+
+
+
+        //return $nextObj;
+
+    }
+
+    public function getSectionNames(){
+        $this->settings = new Settings();
+
+        return $this->settings->getSectionNames();
     }
 }

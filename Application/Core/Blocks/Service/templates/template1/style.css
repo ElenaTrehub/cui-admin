@@ -1,3 +1,4 @@
+/*service-start*/
 .service {
     /*service_bg*/
     padding: 40px 0;
@@ -9,7 +10,6 @@
 .service-content{
     text-align: center;
     margin-bottom: 30px;
-    /*ser_fz_content*/
     /*ser_c_content*/
 
 }
@@ -58,7 +58,6 @@
     object-fit: cover;
 }
 .service-heading {
-    /*service_t_fz*/
     margin: 30px 0 0 0;
 
     text-transform: uppercase;
@@ -67,10 +66,9 @@
 .service-text {
     text-align: justify;
     margin: 15px 0;
-    /*service_text_fz*/
     /*service_t_c*/
 }
-
+/*service-end*/
 
 
 

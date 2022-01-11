@@ -1,11 +1,19 @@
- .feature{
+/*feature-start*/
+.feature{
     width: 100%;
     /*f_bg*/
 }
 .feature__title{
     text-align: center;
 }
+ .feature-wrapper{
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+     flex-wrap: wrap;
+ }
 .feature-item{
+    width: 30%;
     margin-bottom: 40px;
     padding: 20px;
     /*border_item*/
@@ -17,15 +25,12 @@
 .feature-item_number{
     font-size: 40px;
     /*n_f_c*/
-    /*n_fz_c*/
     margin-bottom: 20px;
-
     text-align: left;
 }
 
 .feature-item__title{
     /*f_t_c*/
-    /*f_z_fit*/
     text-transform: uppercase;
     text-align: left;
     margin-bottom: 10px;
@@ -33,13 +38,10 @@
     /*t_border*/
 
 }
-
-
 .feature-item__text{
     font-weight: 400;
-    /*f_text_fz*/
     /*f_text_c*/
     line-height: 20px;
     text-align: justify;
 }
-
+/*feature-end*/

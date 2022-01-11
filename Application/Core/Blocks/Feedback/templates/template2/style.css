@@ -1,3 +1,4 @@
+/*feedback-start*/
 .feedback {
 
     /*feed_bg*/
@@ -28,7 +29,6 @@
     position: relative;
     text-align: justify;
     margin: 3rem 0 2rem 0;
-    /*f_text_fz*/
     /*feed_t_c*/
 }
 .feedback-text:after {
@@ -41,7 +41,6 @@
 .feedback-signature {
     text-align: left;
     margin-left: 35px;
-    /*f_sign_fz*/
     /*feed_s_c*/
 }
 
@@ -60,3 +59,4 @@
 .feedback-prev-btn, .feedback-next-btn{
     margin: 0 20px;
 }
+/*feedback-end*/

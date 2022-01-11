@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Application\Core\Blocks\Slider\templates\template3;
+namespace Application\Core\Blocks\Main\templates\template3;
 
 
 use Application\Core\Settings\Settings;
 use Application\Services\UtilsService;
 
-class SliderTemplate3
+class MainTemplate3
 {
     public $utilsService;
     public $settings;

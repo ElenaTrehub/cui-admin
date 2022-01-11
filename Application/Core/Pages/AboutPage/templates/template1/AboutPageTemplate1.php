@@ -25,7 +25,7 @@ class AboutPageTemplate1
         $this->aboutBuilder = new AboutBuilder();
 
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding, $style){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
@@ -33,7 +33,7 @@ class AboutPageTemplate1
         $obj->js = $jsString;
         $obj->set = $settings;
 
-        $aboutObj = $this->aboutBuilder->getTemplate($id, $settings, 'about', $isLanding);
+        $aboutObj = $this->aboutBuilder->getTemplate($id, $style, $settings, 'about', $isLanding);
 
 
         if(strpos($obj->html, '<!--about-->',0)!==false){

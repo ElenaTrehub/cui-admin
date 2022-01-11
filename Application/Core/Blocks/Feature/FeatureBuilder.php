@@ -18,9 +18,9 @@ class FeatureBuilder
         $this->featureService = new FeatureService();
     }
 
-    public function getTemplate($id, $settings,  $idStr, $isLanding, $userFeatureId = null){
+    public function getTemplate($id, $style, $settings,  $idStr, $isLanding, $userFeatureId = null){
 
-        $featureId = is_null($userFeatureId) ? $this->getFeatureByRubricIdAction($id) : $userFeatureId;
+        $featureId = is_null($userFeatureId) ? $this->getFeatureByRubricIdAction($id, $style) : $userFeatureId;
 
         //$featureId = 3;
         $pathToTemplate = '../Application/Core/Blocks/Feature/templates/template'.$featureId;
@@ -62,15 +62,51 @@ class FeatureBuilder
 
     }
 
-    public function getFeatureByRubricIdAction($id){
+    public function getSectionsByName($id, $styleName){
+
+        $features = $this->featureService->getFeaturesByRubricId($id);
+
+        $featuresArray = [];
+        foreach ($features as $key=>$item){
+
+            $nextFeature = $this->featureService->getFeatureById($item->idFeature)[0];
+
+            if(count($nextFeature)>0){
+                $featuresArray[] = $nextFeature;
+            }
+
+        }
+
+        $featuresStyleArray = [];
+
+        foreach($featuresArray as $key=>$feature){
+            if($feature->style === $styleName){
+                $featuresStyleArray[]= $feature;
+            }
+        }
+
+        return $featuresStyleArray;
+
+    }
+
+    public function getFeatureByRubricIdAction($id, $style){
 
         $features = $this->featureService->getFeaturesByRubricId($id);
 
 
         $featuresArray = [];
         foreach ($features as $key=>$item){
-            $nextFeature = $this->featureService->getFeatureById($item->idFeature)[0];
-            $featuresArray[] = $nextFeature;
+            if($style === 'all'){
+                $nextFeature = $this->featureService->getFeatureById($item->idFeature)[0];
+            }
+            else{
+                $nextFeature = $this->featureService->getFeatureByIdAndStyle($item->idFeature, $style)[0];
+            }
+            if(count($nextFeature)>0){
+                $featuresArray[] = $nextFeature;
+            }
+
+
         }
         $randInt = rand(0, 100);
 

@@ -133,7 +133,7 @@ class HeaderTemplate1
                             }
 
                             if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                             }
 
                             $obj = $this->setLiStyle($obj, '#f9fafc', $colors->anyTextColor, $colors->thirdColor, $colors->secondBg);
@@ -174,7 +174,7 @@ class HeaderTemplate1
 
 
                             if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                             }
 
                             $obj = $this->setLiStyle($obj, $colors->textColor, $colors->titleColor, $colors->thirdColor, $colors->secondBg);
@@ -225,7 +225,7 @@ class HeaderTemplate1
 
                             }
                             if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                             }
 
                             $obj = $this->setLiStyle($obj, '#f9fafc', $colors->anyTextColor, $colors->thirdColor, $colors->secondBg);
@@ -259,7 +259,7 @@ class HeaderTemplate1
 
                             }
                             if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                                $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                             }
 
                             $obj = $this->setLiStyle($obj, $colors->textColor, $colors->titleColor, $colors->thirdColor, $colors->secondBg);
@@ -326,7 +326,7 @@ class HeaderTemplate1
 
 
                         if (strpos($obj->html, '<!--im_l-->', 0) !== false) {
-                            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                         }
 
                         $obj = $this->setLiStyle($obj, $colors->textColor, $colors->titleColor, $colors->thirdColor, $colors->secondBg);
@@ -378,7 +378,7 @@ class HeaderTemplate1
 
                         }
                         if (strpos($obj->html, '<!--im_l-->', 0) !== false) {
-                            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                         }
 
                         $obj = $this->setLiStyle($obj, $colors->textColor, $colors->titleColor, $colors->thirdColor, $colors->secondBg);
@@ -438,7 +438,7 @@ class HeaderTemplate1
                         }
 
                         if (strpos($obj->html, '<!--im_l-->', 0) !== false) {
-                            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                         }
 
                         $obj = $this->setLiStyle($obj, '#f9fafc', $colors->anyTextColor, $colors->thirdColor, $colors->secondBg);
@@ -489,7 +489,7 @@ class HeaderTemplate1
 
                         }
                         if (strpos($obj->html, '<!--im_l-->', 0) !== false) {
-                            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                         }
 
                         $obj = $this->setLiStyle($obj, '#f9fafc', $colors->anyTextColor, $colors->thirdColor, $colors->secondBg);

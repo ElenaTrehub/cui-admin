@@ -1,3 +1,4 @@
+/*header-start*/
 .header{
 
     width: 100%;
@@ -10,8 +11,9 @@
 .header_main{
     /*h_m_bg*/
     /*h_m_fc*/
-    /*h_m_fz*/
     /*h_m_p*/
+
+
 }
 .header_main-wrapper{
     display: flex;
@@ -48,7 +50,6 @@
 
 .menu ul li a{
     /*menu_fc*/
-    /*menu_fz*/
     /*menu_f_transform*/
     transition: all .5s ease;
 }
@@ -191,3 +192,4 @@
         max-width: 150px;
     }
 }
+/*header-end*/

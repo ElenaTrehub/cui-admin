@@ -6,7 +6,7 @@ namespace Application\Core\Pages\IndexPage\templates\template1;
 
 use Application\Core\Blocks\Feature\FeatureBuilder;
 use Application\Core\Blocks\Feedback\FeedbackBuilder;
-use Application\Core\Blocks\Slider\SliderBuilder;
+use Application\Core\Blocks\Main\MainBuilder;
 use Application\Core\Settings\Settings;
 use Application\Services\UtilsService;
 
@@ -27,7 +27,7 @@ class IndexPageTemplate1
         $this->featureBuilder = new FeatureBuilder();
         $this->feedbackBuilder = new FeedbackBuilder();
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding, $style){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
@@ -35,8 +35,8 @@ class IndexPageTemplate1
         $obj->js = $jsString;
         $obj->set = $settings;
 
-        $featureObj = $this->featureBuilder->getTemplate($id, $settings, 'feature', $isLanding);
-        $feedbackObj = $this->feedbackBuilder->getTemplate($id, $featureObj->set, 'feedback', $isLanding);
+        $featureObj = $this->featureBuilder->getTemplate($id, $style, $settings, 'feature', $isLanding);
+        $feedbackObj = $this->feedbackBuilder->getTemplate($id, $style, $featureObj->set, 'feedback', $isLanding);
 
 
 

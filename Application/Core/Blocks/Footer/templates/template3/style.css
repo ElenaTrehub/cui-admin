@@ -1,10 +1,10 @@
+/*footer-start*/
 .footer{
     /*footer_bg*/
 }
 
 .footer-text {
     /*footer_bottom_text_align*/
-    /*footer_bottom_text_fz*/
     /*footer_bottom_text_c*/
     line-height: 18px;
 }
@@ -13,3 +13,4 @@
     text-transform: uppercase;
     margin-right: 5px;
 }
+/*footer-end*/

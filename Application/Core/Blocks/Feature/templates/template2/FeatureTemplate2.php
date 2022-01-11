@@ -25,7 +25,7 @@ class FeatureTemplate2
         $obj->js = $jsString;
         $obj->set = $settings;
 
-        $obj = $this->setFontStyle($obj, $settings->fonts);
+
 
         if($obj->set->theme == 'normal'){
             $obj = $this->setColorStyle($obj, $settings->colors, $id);
@@ -41,22 +41,7 @@ class FeatureTemplate2
         return $obj;
     }
 
-    public function setFontStyle($obj, $fonts){
-        if(strpos($obj->style, '/*f_z_fit*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*f_z_fit*/', 'font-size:'.$fonts->textSize.';');
 
-        }
-        if(strpos($obj->style, '/*f_z_f_span*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*f_z_f_span*/', 'font-size:'.$fonts->h1Size.';');
-
-        }
-        if(strpos($obj->style, '/*f_text_fz*/',0)!==false){
-            $obj->style = $this->utilsService->parseStyle($obj->style, '/*f_text_fz*/', 'font-size:'.$fonts->linkSize.';');
-
-        }
-
-        return $obj;
-    }
 
     public function setColorsForChildInLightBlock($obj, $colors){
         if(strpos($obj->js, '/*feature_h_c*/',0)!==false){

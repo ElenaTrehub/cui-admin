@@ -26,9 +26,10 @@ class HeaderBuilder
         $this->settings = new Settings();
     }
 
-    public function getTemplate($id, $settings, $menu, $isLanding){
+    public function getTemplate($id, $style, $settings, $menu, $isLanding, $userHeaderId = null){
 
-        $headerId = $this->getHeaderByRubricIdAction($id);
+        $headerId = is_null($userHeaderId) ? $this->getHeaderByRubricIdAction($id, $style) : $userHeaderId;
+
         //$headerId = 2;
         $pathToTemplate = '../Application/Core/Blocks/Header/templates/template'.$headerId;
 
@@ -48,6 +49,7 @@ class HeaderBuilder
                 $html = $this->setLandingMenu($htmlString, $menu);
             }
             else{
+
                 $html = $this->setManyPageSiteMenu($htmlString, $menu);
             }
 
@@ -58,7 +60,7 @@ class HeaderBuilder
 
             $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder,  $settings);
 
-
+            //printf($obj->html);
 
             $header = new \stdClass();
             $header->html = $obj->html;
@@ -73,14 +75,51 @@ class HeaderBuilder
 
     }
 
-    public function getHeaderByRubricIdAction($id){
+    public function getSectionsByName($id, $styleName){
+
+        $headeres = $this->headerService->getHeadersByRubricId($id);
+
+        $headersArray = [];
+        foreach ($headeres as $key=>$item){
+
+            $nextHeader = $this->headerService->getHeaderById($item->idHeader)[0];
+
+            if(count($nextHeader)>0){
+                $headersArray[] = $nextHeader;
+            }
+
+        }
+
+        $headersStyleArray = [];
+
+        foreach($headersArray as $key=>$header){
+            if($header->style === $styleName){
+                $headersStyleArray[]= $header;
+            }
+        }
+
+        return $headersStyleArray;
+
+    }
+    public function getHeaderByRubricIdAction($id, $style){
 
         $headers = $this->headerService->getHeadersByRubricId($id);
 
+
+
         $headerArray = [];
         foreach ($headers as $key=>$item){
-            $nextHeader = $this->headerService->getHeaderById($item->idHeader)[0];
-            $headerArray[] = $nextHeader;
+            if($style === 'all'){
+                $nextHeader = $this->headerService->getHeaderById($item->idHeader)[0];
+            }
+            else{
+
+                $nextHeader = $this->headerService->getHeaderByIdAndStyle($item->idHeader, $style)[0];
+            }
+            if(count($nextHeader)>0){
+                $headerArray[] = $nextHeader;
+            }
+
         }
         $randInt = rand(0, 100);
 
@@ -105,7 +144,7 @@ class HeaderBuilder
 
             $translate = $this->settings->getTranslateForMenu($menu[$i], 'ru');
             $linkStr = lcfirst($menu[$i]);
-            $menuStr = $menuStr."<li><a href='#{$linkStr}'> $translate </a></li>";
+            $menuStr = $menuStr."<li><a class='linkSize' href='#{$linkStr}'> $translate </a></li>";
 
         }
 
@@ -117,7 +156,6 @@ class HeaderBuilder
     }
     public function setManyPageSiteMenu($htmlString, $menu){
         $menuStr = '';
-
         foreach ($menu as $key => $value) {
 
             $translate = $this->settings->getTranslateForMenu($key, 'ru');
@@ -130,16 +168,39 @@ class HeaderBuilder
                     $translateInto = $this->settings->getTranslateForMenu($keyInto, 'ru');
                     $linkIntoStr = lcfirst($keyInto);
 
-                    $menuIntoStr = $menuIntoStr . "<li><a href='{$linkIntoStr}.html'> $translateInto </a></li>";
+
+
+                    if (count($valueInto) > 0) {
+
+                        $menuIntoSecondStr = '';
+                        foreach ($valueInto as $keyIntoSecond => $valueIntoSecond) {
+                            $translateInto = $this->settings->getTranslateForMenu($keyIntoSecond, 'ru');
+                            $linkIntoStr = lcfirst($keyIntoSecond);
+
+                            $menuIntoSecondStr = $menuIntoSecondStr . "<li><a class='linkSize' href='{$linkIntoStr}.html'> $translateInto </a></li>";
+
+                        }
+                        $menuIntoStr = $menuIntoStr . "<li><a class='linkSize' href='{$linkIntoStr}.html'> $translateInto </a>
+                                        <ul>
+                                            {$menuIntoSecondStr}
+                                        </ul>
+                                    </li>";
+
+                    }
+                    else{
+                        $menuIntoStr = $menuIntoStr . "<li><a class='linkSize' href='{$linkIntoStr}.html'> $translateInto </a></li>";
+                    }
+
+
                 }
 
-                $menuStr = $menuStr . "<li><a href='{$linkStr}.html'> $translate </a>
+                $menuStr = $menuStr . "<li><a class='linkSize' href='{$linkStr}.html'> $translate </a>
                                         <ul>
                                             {$menuIntoStr}
                                         </ul>
                                     </li>";
             } else {
-                $menuStr = $menuStr . "<li><a href='{$linkStr}.html'> $translate </a></li>";
+                $menuStr = $menuStr . "<li><a class='linkSize' href='{$linkStr}.html'> $translate </a></li>";
             }
 
 
@@ -149,22 +210,15 @@ class HeaderBuilder
         if(strpos($htmlString, '<!--landingMenu-->',0)!==false){
             $htmlString = $this->utilsService->parseStyle($htmlString, '<!--landingMenu-->', $menuStr);
         }
+        if(strpos($htmlString, '<!--landingSmallMenu-->',0)!==false){
+            $htmlString = $this->utilsService->parseStyle($htmlString, '<!--landingSmallMenu-->', $menuStr);
+        }
         return $htmlString;
     }
 
     public function setFontStyle($style, $fonts){
 
-        if(strpos($style, '/*h_t_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*h_t_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
 
-        if(strpos($style, '/*h_m_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*h_m_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
-
-        if(strpos($style, '/*menu_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*menu_fz*/', 'font-size: '.$fonts->linkSize.';');
-        }
         $textTransform = ['none', 'uppercase'];
         $index = rand(0, 2);
         if(strpos($style, '/*menu_f_transform*/',0)!==false){

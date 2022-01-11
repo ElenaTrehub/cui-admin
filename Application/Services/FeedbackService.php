@@ -35,5 +35,17 @@ class FeedbackService
 
         return $feedback;
     }
+    public function getFeedbackByIdAndStyle($id, $style){
+
+        $stm = MySQL::$db->prepare("SELECT * FROM feedback WHERE idFeedback = :id AND style = :styleStr");
+        $stm->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stm->bindParam(':styleStr', $style, \PDO::PARAM_STR);
+
+        $stm->execute();
+
+        $feedback = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        return $feedback;
+    }
 
 }

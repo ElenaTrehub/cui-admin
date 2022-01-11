@@ -45,7 +45,7 @@ class FeedbackTemplate3
     }
     public function setJs($obj){
 
-        if(isset($obj->set->getSliderOfThreeItems)){
+        if(isset($obj->set->getSliderOfThreeItems) && $obj->set->getSliderOfThreeItems === true){
             if(strpos($obj->js, '//js_code_feedback',0)!==false){
                 $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', 'slidesThreeSlider(".feedback-slider-item", ".feedback-wrapper", ".feedback-slider", ".feedback-prev-btn", ".feedback-next-btn");');
             }

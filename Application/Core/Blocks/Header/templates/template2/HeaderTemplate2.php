@@ -50,7 +50,7 @@ class HeaderTemplate2
 
         $obj->style = $this->utilsService->parseStyle($obj->style, '/*h_m_bg_block*/', '.header_main_bg_block{/*h_m_bg*/}');
         $obj->js = $this->utilsService->parseStyle($obj->js, '//header', "let header_main = document.querySelector('.header_main');
-    header_main.classList.add('header_main_bg_block');");
+    if(header_main){header_main.classList.add('header_main_bg_block');}");
         if($index == 0){
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*header_fixed*/', '.header_fixed{position: fixed; z-index: 102;}');
             $obj->style = $this->utilsService->parseStyle($obj->style, '/*header_fixed_top*/', '.header_fixed_top{display: none;}');
@@ -63,7 +63,7 @@ class HeaderTemplate2
     
     window.addEventListener('scroll', ()=> {
 
-
+    if(header_top && header_main){
         let top = window.scrollY;
 
         if(top > 20){
@@ -86,6 +86,10 @@ class HeaderTemplate2
                 header_top.classList.remove('header_fixed_top');
             }
         }
+    
+    
+    }
+        
     });");
         }
         $obj->set->position = $positions[$index];
@@ -144,7 +148,7 @@ class HeaderTemplate2
                     }
 
                     if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                        $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                        $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                     }
 
                     $obj = $this->setLiStyle($obj, $colors->textColor, $colors->titleColor, $colors->secondBg, '#fcfcfc');
@@ -194,7 +198,7 @@ class HeaderTemplate2
                     }
 
                     if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                        $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                        $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                     }
 
                     $obj = $this->setLiStyle($obj, $colors->linkColor, $colors->anyTextColor, $colors->secondBg, '#fcfcfc');
@@ -253,7 +257,7 @@ class HeaderTemplate2
                 }
 
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                 }
 
                 $obj = $this->setLiStyle($obj, $colors->textColor, $colors->titleColor, $colors->secondBg, '#fcfcfc');
@@ -299,7 +303,7 @@ class HeaderTemplate2
                 }
 
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                 }
 
                 $obj = $this->setLiStyle($obj, $colors->linkColor, $colors->anyTextColor, $colors->secondBg, '#fcfcfc');
@@ -356,7 +360,7 @@ class HeaderTemplate2
                 }
 
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                 }
 
                 $obj = $this->setLiStyle($obj, '#ffffff', $colors->secondBg, '#fcfcfc', $colors->secondBg);
@@ -399,7 +403,7 @@ class HeaderTemplate2
                 }
 
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                 }
 
                 $obj = $this->setLiStyle($obj, '#ffffff', $colors->secondBg, '#fcfcfc', $colors->secondBg);

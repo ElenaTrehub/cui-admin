@@ -18,12 +18,12 @@ class AboutBuilder
         $this->aboutService = new AboutService();
     }
 
-    public function getTemplate($id, $settings, $idStr, $isLanding, $userAboutId = null ){
+    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userAboutId = null ){
 
 
-        $aboutId = is_null($userAboutId) ? $this->getAboutByRubricIdAction($id) : $userAboutId;
+        $aboutId = is_null($userAboutId) ? $this->getAboutByRubricIdAction($id, $style) : $userAboutId;
 
-        //$aboutId = 3;
+        // $aboutId = 3;
         $pathToTemplate = '../Application/Core/Blocks/About/templates/template'.$aboutId;
 
 
@@ -66,15 +66,62 @@ class AboutBuilder
 
     }
 
-    public function getAboutByRubricIdAction($id){
+    public function getSectionsByName($id, $styleName){
+
+        $abouts = $this->aboutService->getAboutByRubricId($id);
+
+        $aboutsArray = [];
+        foreach ($abouts as $key=>$item){
+
+            $nextAbout = $this->aboutService->getaboutById($item->idAbout)[0];
+
+            if(count($nextAbout)>0){
+                $aboutsArray[] = $nextAbout;
+            }
+
+        }
+
+        $aboutsStyleArray = [];
+
+        foreach($aboutsArray as $key=>$about){
+            if($about->style === $styleName){
+                $aboutsStyleArray[]= $about;
+            }
+        }
+
+//        $result = [];
+//        foreach($aboutsStyleArray as $key=>$about){
+//            $aboutTemp = $this->getTemplate($id, $styleName, $currentSettings, true, $about->aboutId);
+//
+//            $result[]= $aboutTemp;
+//        }
+
+        //print_r($aboutsStyleArray);
+
+        return $aboutsStyleArray;
+
+    }
+
+
+
+    public function getAboutByRubricIdAction($id, $style){
 
         $abouts = $this->aboutService->getAboutByRubricId($id);
 
 
         $aboutsArray = [];
         foreach ($abouts as $key=>$item){
-            $nextAbout = $this->aboutService->getaboutById($item->idAbout)[0];
-            $aboutsArray[] = $nextAbout;
+
+            if($style === 'all'){
+                $nextAbout = $this->aboutService->getaboutById($item->idAbout)[0];
+            }
+            else{
+                $nextAbout = $this->aboutService->getaboutByIdAndStyle($item->idAbout, $style)[0];
+            }
+            if(count($nextAbout)>0){
+                $aboutsArray[] = $nextAbout;
+            }
+
         }
         $randInt = rand(0, 100);
 
@@ -91,11 +138,6 @@ class AboutBuilder
     }
 
     public function setFontStyle($style, $fonts){
-
-
-        if(strpos($style, '/*a_t_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*a_t_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
 
 
 

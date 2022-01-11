@@ -1,3 +1,4 @@
+/*service-start*/
 .service {
     /*service_bg*/
     padding: 40px 0;
@@ -9,7 +10,6 @@
 .service-content{
     text-align: center;
     margin-bottom: 30px;
-    /*ser_fz_content*/
     /*ser_c_content*/
 
 }
@@ -21,7 +21,6 @@
 
 .service-heading{
     position: relative;
-    font-size: 16px;
     cursor: pointer;
     text-align: left;
     padding: 15px 0;
@@ -60,7 +59,6 @@ p.active-style span {
 
 .service-text {
     max-height: 0;
-    font-size: 14px;
     transition: all 0.3s ease-out;
     overflow: hidden;
     /*service_t_c*/
@@ -82,7 +80,7 @@ p.active-style span {
         margin-top: 20px;
     }
 }
-
+/*service-end*/
 
 
 

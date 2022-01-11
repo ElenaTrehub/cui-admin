@@ -33,4 +33,17 @@ class HeaderService
         return $header;
     }
 
+    public function getHeaderByIdAndStyle($id, $style){
+
+        $stm = MySQL::$db->prepare("SELECT * FROM header WHERE idHeader = :id AND style = :styleStr");
+        $stm->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stm->bindParam(':styleStr', $style, \PDO::PARAM_STR);
+
+        $stm->execute();
+
+        $header = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        return $header;
+    }
+
 }

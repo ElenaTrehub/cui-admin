@@ -7,7 +7,9 @@ namespace Application\Services;
 class UtilsService
 {
     public function getItemByWeight($arr){
-
+        if(count($arr)<2){
+            return $arr[0];
+        }
         usort ( $arr , function ($a, $b) {
 
             if($a->weight == $b->weight){

@@ -1,3 +1,4 @@
+/*about-start*/
 .about{
     width: 100%;
     z-index: 20;
@@ -50,7 +51,6 @@
 }
 .about-content__text{
     font-weight: 300;
-    /*a_t_fz*/
     /*a_t_c*/
     line-height: 20px;
     text-align: justify;
@@ -62,3 +62,4 @@
         padding-left: 12px;
     }
 }
+/*about-end*/

@@ -1,45 +1,47 @@
 <!--nameSection-->
   <div class="container">
-    <div class="contact-title title">Остались вопросы?</div>
+    <div class="contact-title title h2">Остались вопросы?</div>
     <div class="row">
-      <div class="col-md-7  col-sm-12 wow animate__fadeInLeft animate__animated">
-        <form action="#" method="POST">
-          <div class="contact-content__text">
-            Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн.
-          </div>
-          <div class="input-wrapper">
-            <input class="input" type='text' name='name' placeholder="Name" required>
-              <input class="input" type='text' name='lastname' placeholder="Lastname" required>
-            <input class="input" type='text' name='phone' placeholder="Phone" required>
-              <input class="input" type='text' name='email' placeholder="E-mail">
-            <textarea class="textarea" name='message' rows="6" placeholder="Задайте ваш вопрос здесь" required></textarea>
-          </div>
-          <button class="button button-order">Отправить</button>
-        </form>
-      </div>
+        <div class="col-md-7  col-sm-12 wow animate__fadeInLeft animate__animated">
+            <div class="contact-content__text textSize">
+                Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн.
+            </div>
+            <form class="send-form" action="#" method="POST">
+
+                <div class="input-wrapper">
+                    <input class="input input-name" type='text' name='name' placeholder="Name" required>
+                    <input class="input input-phone" type='text' name='phone' placeholder="Phone" required>
+                    <input class="input input-email" type='text' name='email' placeholder="E-mail">
+                    <textarea class="textarea input-message" name='message' rows="6" placeholder="Задайте ваш вопрос здесь" required></textarea>
+                </div>
+                <button class="button button-order">Отправить</button>
+            </form>
+        </div>
+
+
       <div class="col-md-4 offset-md-1 col-sm-12 wow animate__animated animate__fadeInRight">
         <div class="contact-content">
 
 
             <div class="contact-info__item">
               <span>Адрес:</span>
-                <p><i class="fas fa-map-marker-alt"></i> г.Киев, пр-т Победы, 65</p>
+                <div class="textSize"><span><i class="fas fa-map-marker-alt"></i></span><span class="contact-address"> г.Киев, пр-т Победы, 65</span></div>
             </div>
             <div class="contact-info__item">
               <span>Телефон:</span>
-                <p><i class="fas fa-phone-volume"></i> +3(8066) 965-56-45</p>
+                <div class="textSize"><span><i class="fas fa-phone-volume"></i></span><span class="contact-phone"> +3(8066) 965-56-45</span></div>
             </div>
             <div class="contact-info__item">
               <span>E-mail:</span>
-                <p><i class="fas fa-envelope"></i> company@gmail.com</p>
+                <div class="textSize"><span><i class="fas fa-envelope"></i></span><span class="contact-email"> company@gmail.com</span></div>
             </div>
             <div class="contact-info__item">
               <span>Время работы:</span>
-                <p><i class="fas fa-calendar-alt"></i> с 09.00 - 19.00</p>
+                <div class="textSize"><span><i class="fas fa-calendar-alt"></i></span><span class="contact-time"> с 09.00 - 19.00</span></div>
             </div>
             <div class="contact-info__item">
               <span>Выходной:</span>
-                <p><i class="fas fa-mug-hot"></i> суббота и воскресенье</p>
+                <div class="textSize"><span><i class="fas fa-mug-hot"></i></span><span class="contact-holiday"> суббота и воскресенье</span></div>
             </div>
 
         </div>

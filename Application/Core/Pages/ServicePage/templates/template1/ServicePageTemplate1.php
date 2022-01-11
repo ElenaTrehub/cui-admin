@@ -23,7 +23,7 @@ class ServicePageTemplate1
 
         $this->serviceBuilder = new ServiceBuilder();
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding, $style){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
@@ -31,7 +31,7 @@ class ServicePageTemplate1
         $obj->js = $jsString;
         $obj->set = $settings;
 
-        $serviceObj = $this->serviceBuilder->getTemplate($id, $settings, 'service', $isLanding);
+        $serviceObj = $this->serviceBuilder->getTemplate($id, $style, $settings, 'service', $isLanding);
 
 
 

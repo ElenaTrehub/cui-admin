@@ -1,3 +1,4 @@
+/*footer-start*/
 .footer__top {
     /*footer_top_bg*/
 }
@@ -8,7 +9,6 @@
 }
 .footer__top-title{
      text-transform: uppercase;
-    /*footer_top_title_fz*/
      margin-bottom: 30px;
     /*footer_top_title_c*/
 
@@ -25,7 +25,7 @@
     /*footer_top_li_hover_c*/
 }
 
-.footer__top-services {
+.footer-services {
     padding-right: 30px;
 }
 .footer__top li a{
@@ -33,22 +33,22 @@
       margin-bottom: 15px;
       transition: color .3s ease;
 /*footer_top_li_transform*/
-    /*footer_top_li_fz*/
+
   }
 
 
 
-.footer__top-info{
+.footer-info{
     display: block;
     margin-bottom: 15px;
     /*footer_top_info_c*/
-    /*footer_top_info_fz*/
+
 }
-.footer__top-info .fas{
+.footer-info .fas{
     /*footer_top_info_fas_c*/
     margin-right: 10px;
 }
-.footer__top-info:hover{
+.footer-info:hover{
     display: block;
     margin-bottom: 15px;
     /*footer_top_info_hover_c*/
@@ -73,8 +73,7 @@
     width: 100%;
     height: auto;
 }
-.footer__bottom-text {
-    /*footer_bottom_text_fz*/
+.footer-text {
     /*footer_bottom_text_c*/
     line-height: 18px;
     padding-top: 20px;
@@ -90,3 +89,4 @@
     content: "\f2a0"; }
 .fa-envelope:before {
     content: "\f0e0"; }
+/*footer-end*/

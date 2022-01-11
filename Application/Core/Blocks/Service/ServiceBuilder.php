@@ -19,11 +19,11 @@ class ServiceBuilder
         $this->serviceService = new ServiceService();
     }
 
-    public function getTemplate($id, $settings, $idStr, $isLanding, $userServiceId = null){
+    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userServiceId = null){
 
-        $serviceId = is_null($userServiceId) ? $this->getServiceByRubricIdAction($id) : $userServiceId;
+        $serviceId = is_null($userServiceId) ? $this->getServiceByRubricIdAction($id, $style) : $userServiceId;
 
-        //$serviceId = 3;
+        $serviceId = 3;
         $pathToTemplate = '../Application/Core/Blocks/Service/templates/template'.$serviceId;
 
 
@@ -64,16 +64,49 @@ class ServiceBuilder
 
 
     }
+    public function getSectionsByName($id, $styleName){
 
-    public function getServiceByRubricIdAction($id){
+        $services = $this->serviceService->getServiceByRubricId($id);
+
+        $servicesArray = [];
+        foreach ($services as $key=>$item){
+
+            $nextService = $this->serviceService->getServiceById($item->idService)[0];
+
+            if(count($nextService)>0){
+                $servicesArray[] = $nextService;
+            }
+
+        }
+
+        $servicesStyleArray = [];
+
+        foreach($servicesArray as $key=>$service){
+            if($service->style === $styleName){
+                $servicesStyleArray[]= $service;
+            }
+        }
+
+        return $servicesStyleArray;
+
+    }
+    public function getServiceByRubricIdAction($id, $style){
 
         $services = $this->serviceService->getServiceByRubricId($id);
 
 
         $servicesArray = [];
         foreach ($services as $key=>$item){
-            $nextService = $this->serviceService->getServiceById($item->idService)[0];
-            $servicesArray[] = $nextService;
+            if($style === 'all'){
+                $nextService = $this->serviceService->getServiceById($item->idService)[0];
+            }
+            else{
+                $nextService = $this->serviceService->getServiceByIdAndStyle($item->idService, $style)[0];
+            }
+            if(count($nextService)>0){
+                $servicesArray[] = $nextService;
+            }
+
         }
         $randInt = rand(0, 100);
 
@@ -90,19 +123,6 @@ class ServiceBuilder
     }
 
     public function setFontStyle($style, $fonts){
-
-        if(strpos($style, '/*service_t_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*service_t_fz*/', 'font-size: '.$fonts->h4Size.';');
-        }
-
-        if(strpos($style, '/*service_text_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*service_text_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
-        if(strpos($style, '/*ser_fz_content*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*ser_fz_content*/', 'font-size: '.$fonts->textSize.';');
-        }
-
-
 
         return $style;
     }

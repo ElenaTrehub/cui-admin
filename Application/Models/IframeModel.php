@@ -9,18 +9,18 @@ use Application\Core\Builder;
 class IframeModel
 {
 //Вызываю построение сайта из програмного ядра
-    public function getLandingTemplateObj($id){
+    public function getLandingTemplateObj($id, $style, $theme){
 
         $builder = new Builder();
 
-        return $builder->getLandingTemplateObjCore($id);
+        return $builder->getLandingTemplateObjCore($id, $style, $theme);
 
     }
-    public function getManyPageSiteTemplateObj($id){
+    public function getManyPageSiteTemplateObj($id, $style, $theme){
 
         $builder = new Builder();
 
-        return $builder->getManyPageSiteTemplateObjCore($id);
+        return $builder->getManyPageSiteTemplateObjCore($id, $style, $theme);
 
     }
 }

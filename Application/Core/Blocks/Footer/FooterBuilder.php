@@ -21,9 +21,9 @@ class FooterBuilder
         $this->settings = new Settings();
     }
 
-    public function getTemplate($id, $settings, $menu, $isLanding){
+    public function getTemplate($id, $style, $settings, $menu, $isLanding, $userFooterId = null){
+        $footerId = is_null($userFooterId) ? $this->getFooterByRubricIdAction($id, $style) : $userFooterId;
 
-        $footerId = $this->getFooterByRubricIdAction($id);
         //$footerId = 3;
         $pathToTemplate = '../Application/Core/Blocks/Footer/templates/template'.$footerId;
 
@@ -69,14 +69,49 @@ class FooterBuilder
 
     }
 
-    public function getFooterByRubricIdAction($id){
+    public function getSectionsByName($id, $styleName){
+
+        $footers = $this->footerService->getFootersByRubricId($id);
+
+        $footersArray = [];
+        foreach ($footers as $key=>$item){
+
+            $nextFooter = $this->footerService->getFooterById($item->idFooter)[0];
+
+            if(count($nextFooter)>0){
+                $footersArray[] = $nextFooter;
+            }
+
+        }
+
+        $footersStyleArray = [];
+
+        foreach($footersArray as $key=>$footer){
+            if($footer->style === $styleName){
+                $footersStyleArray[]= $footer;
+            }
+        }
+
+        return $footersStyleArray;
+
+    }
+
+    public function getFooterByRubricIdAction($id, $style){
 
         $footers = $this->footerService->getFootersByRubricId($id);
 
         $footerArray = [];
         foreach ($footers as $key=>$item){
-            $nextFooter = $this->footerService->getFooterById($item->idFooter)[0];
-            $footerArray[] = $nextFooter;
+            if($style === 'all'){
+                $nextFooter = $this->footerService->getFooterById($item->idFooter)[0];
+            }
+            else{
+                $nextFooter = $this->footerService->getFooterByIdAndStyle($item->idFooter, $style)[0];
+            }
+            if(count($nextFooter)>0){
+                $footerArray[] = $nextFooter;
+            }
+
         }
         $randInt = rand(0, 100);
 
@@ -101,7 +136,7 @@ class FooterBuilder
 
             $translate = $this->settings->getTranslateForMenu($menu[$i], 'ru');
             $linkStr = lcfirst($menu[$i]);
-            $menuStr = $menuStr."<li><a href='#{$linkStr}'> $translate </a></li>";
+            $menuStr = $menuStr."<li><a class='linkSize'  href='#{$linkStr}'> $translate </a></li>";
 
         }
 
@@ -126,16 +161,16 @@ class FooterBuilder
                     $translateInto = $this->settings->getTranslateForMenu($keyInto, 'ru');
                     $linkIntoStr = lcfirst($keyInto);
 
-                    $menuIntoStr = $menuIntoStr . "<li><a href='{$linkIntoStr}.html'> $translateInto </a></li>";
+                    $menuIntoStr = $menuIntoStr . "<li><a class='linkSize' href='{$linkIntoStr}.html'> $translateInto </a></li>";
                 }
 
-                $menuStr = $menuStr . "<li><a href='{$linkStr}.html'> $translate </a>
+                $menuStr = $menuStr . "<li><a class='linkSize' href='{$linkStr}.html'> $translate </a>
                                         <ul>
                                             {$menuIntoStr}
                                         </ul>
                                     </li>";
             } else {
-                $menuStr = $menuStr . "<li><a href='{$linkStr}.html'> $translate </a></li>";
+                $menuStr = $menuStr . "<li><a class='linkSize' href='{$linkStr}.html'> $translate </a></li>";
             }
 
 
@@ -152,24 +187,12 @@ class FooterBuilder
 
     public function setFontStyle($style, $fonts){
 
-        if(strpos($style, '/*footer_top_title_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*footer_top_title_fz*/', 'font-size: '.$fonts->h4Size.';');
-        }
+        $textTransform = ['none', 'uppercase'];
+        $index = rand(0, 2);
 
-        if(strpos($style, '/*footer_top_li_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*footer_top_li_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
-
-        if(strpos($style, '/*footer_top_info_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*footer_top_info_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
-
-        if(strpos($style, '/*footer_bottom_text_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*footer_bottom_text_fz*/', 'font-size: '.$fonts->linkSize.';');
-        }
 
         if(strpos($style, '/*footer_top_li_transform*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*footer_top_li_transform*/', 'text-transform: '.$fonts->textTransform.';');
+            $style = $this->utilsService->parseStyle($style, '/*footer_top_li_transform*/', 'text-transform: '.$textTransform[$index].';');
         }
 
         return $style;

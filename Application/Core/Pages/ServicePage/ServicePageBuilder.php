@@ -19,9 +19,9 @@ class ServicePageBuilder
         $this->servicePageService = new ServicePageService();
     }
 
-    public function getPageTemplate($id, $settings, $idStr, $isLanding){
+    public function getPageTemplate($id, $style, $settings, $idStr, $isLanding){
 
-        $servicePageId = $this->getServicePageByRubricIdAction($id);
+        $servicePageId = $this->getServicePageByRubricIdAction($id, $style);
 
         $servicePageId = 1;
         $pathToTemplate = '../Application/Core/Pages/ServicePage/templates/template'.$servicePageId;
@@ -42,7 +42,7 @@ class ServicePageBuilder
 
 
 
-            $obj = $this->setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding);
+            $obj = $this->setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding, $style);
 
 
 
@@ -60,15 +60,27 @@ class ServicePageBuilder
 
 
 
-    public function getServicePageByRubricIdAction($id){
+    public function getServicePageByRubricIdAction($id, $style){
 
         $servicePages = $this->servicePageService->getServicePageByRubricId($id);
 
 
         $servicePagesArray = [];
         foreach ($servicePages as $key=>$item){
-            $nextServicePage = $this->servicePageService->getServicePageById($item->idServicePage)[0];
-            $servicePagesArray[] = $nextServicePage;
+            if($style === 'all'){
+                $nextServicePage = $this->servicePageService->getServicePageById($item->idServicePage)[0];
+            }
+            else{
+
+                $nextServicePage = $this->servicePageService->getServicePageByIdAndStyle($item->idServicePage, $style)[0];
+            }
+            if(count($nextServicePage)>0){
+                $servicePagesArray[] = $nextServicePage;
+            }
+
+
+
+
         }
 
 
@@ -92,11 +104,11 @@ class ServicePageBuilder
 
 
 
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $idStr, $isLanding, $style){
 
         $uniqueStyleBuilder = new $UniqueStyleBuilder();
 
-        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding);
+        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $idStr, $isLanding, $style);
 
     }
 }

@@ -19,9 +19,9 @@ class ContactBuilder
         $this->contactService = new ContactService();
     }
 
-    public function getTemplate($id, $settings, $idStr, $isLanding, $userContactId = null){
+    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userContactId = null){
 
-        $contactId = is_null($userContactId) ? $this->getContactByRubricIdAction($id) : $userContactId;
+        $contactId = is_null($userContactId) ? $this->getContactByRubricIdAction($id, $style) : $userContactId;
 
 
         //$contactId = 3;
@@ -66,41 +66,65 @@ class ContactBuilder
 
 
     }
+    public function getSectionsByName($id, $styleName){
 
-    public function getContactByRubricIdAction($id){
+        $contacts = $this->contactService->getConsultationsByRubricId($id);
+
+        $consultationsArray = [];
+        foreach ($contacts as $key=>$item){
+
+            $nextContact = $this->contactService->getConsultationById($item->idContact)[0];
+
+            if(count($nextContact)>0){
+                $consultationsArray[] = $nextContact;
+            }
+
+        }
+
+        $contactsStyleArray = [];
+
+        foreach($consultationsArray as $key=>$contact){
+            if($contact->style === $styleName){
+                $contactsStyleArray[]= $contact;
+            }
+        }
+
+        return $contactsStyleArray;
+
+    }
+    public function getContactByRubricIdAction($id, $style){
 
         $contacts = $this->contactService->getConsultationsByRubricId($id);
 
 
         $contactsArray = [];
         foreach ($contacts as $key=>$item){
-            $nextContact = $this->contactService->getConsultationById($item->idConsultation)[0];
-            $contactsArray[] = $nextContact;
+            if($style === 'all'){
+                $nextContact = $this->contactService->getConsultationById($item->idContact)[0];
+            }
+            else{
+                $nextContact = $this->contactService->getConsultationByIdAndStyle($item->idContact, $style)[0];
+            }
+            if(count($nextContact)>0){
+                $contactsArray[] = $nextContact;
+            }
+
         }
         $randInt = rand(0, 100);
 
 
         if($randInt < 20){
             $index = rand(0, count($contacts)-1);
-            $contactId = $contacts[$index]->idConsultation;
+            $contactId = $contacts[$index]->idContact;
         }
         else{
-            $contactId = $this->utilsService->getItemByWeight($contactsArray)->idConsultation;
+            $contactId = $this->utilsService->getItemByWeight($contactsArray)->idContact;
         }
 
         return $contactId;
     }
 
     public function setFontStyle($style, $fonts){
-
-
-
-        if(strpos($style, '/*contact_content_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*contact_content_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
-        if(strpos($style, '/*contact_info_fz*/',0)!==false){
-            $style = $this->utilsService->parseStyle($style, '/*contact_info_fz*/', 'font-size: '.$fonts->textSize.';');
-        }
 
 
         return $style;

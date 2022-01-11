@@ -62,12 +62,14 @@ class ServiceTemplate3
 
     public function setJs($obj){
 
-        if(isset($obj->set->getSliderOfThreeItems)){
+        if(isset($obj->set->getSliderOfThreeItems) && $obj->set->getSliderOfThreeItems == true){
+
             if(strpos($obj->js, '//js_code_service',0)!==false){
                 $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_service', 'slidesThreeSlider(".service-slider-item", ".service-wrapper", ".service-slider", ".service-prev-btn", ".service-next-btn");');
             }
         }
         else{
+            //echo 2;
             $obj->set->getSliderOfThreeItems = true;
             if(strpos($obj->js, '//js_code_service',0)!==false){
                 $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_service', $this->jsLibs->getJsLib('getSliderOfThreeItems').'slidesThreeSlider(".service-slider-item", ".service-wrapper", ".service-slider", ".service-prev-btn", ".service-next-btn");');

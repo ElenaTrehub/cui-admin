@@ -1,3 +1,4 @@
+/*feedback-start*/
 .feedback {
 
     /*feed_bg*/
@@ -20,7 +21,6 @@
     box-sizing: border-box;
 }
 .feedback-heading {
-    font-size: 48px;
     line-height: 36px;
     text-align: left;
     margin-top: 45px;
@@ -33,13 +33,11 @@
     font-style: italic;
     line-height: 1.5;
     margin-bottom: 2rem;
-    /*f_text_fz*/
     /*feed_t_c*/
 }
 
 .feedback-signature {
     text-align: left;
-    /*f_sign_fz*/
     /*feed_s_c*/
 }
 
@@ -57,3 +55,4 @@
 .feedback-prev-btn, .feedback-next-btn{
     margin: 0 20px;
 }
+/*feedback-end*/

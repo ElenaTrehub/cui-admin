@@ -1,3 +1,4 @@
+/*contact-start*/
 .contact {
     /*contact_bg*/
 }
@@ -13,12 +14,11 @@
     text-align: left;
     padding-right: 20px;
     margin-bottom: 30px;
-    /*contact_content_fz*/
+
     /*contact_content_c*/
 }
 .contact-content__info p{
     margin-bottom: 20px;
-    /*contact_info_fz*/
     /*contact_info_c*/
 }
 .contact-content__info span{
@@ -38,5 +38,5 @@
 .contact .button-order {
     margin-top: 1rem;
 }
-
+/*contact-end*/
 

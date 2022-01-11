@@ -63,8 +63,8 @@ class HeaderTemplate3
     
     window.addEventListener('scroll', ()=> {
 
-
-        let top = window.scrollY;
+    if(header_top && header_main){
+    let top = window.scrollY;
 
         if(top > 20){
             header.classList.add('header_fixed');
@@ -90,6 +90,9 @@ class HeaderTemplate3
             header_top.classList.add('d-lg-block');
             header_top.classList.add('d-md-block');
         }
+    
+    }
+            
     });");
         }
         $obj->set->position = $positions[$index];
@@ -111,10 +114,10 @@ class HeaderTemplate3
 
                 }
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                 }
                 if(strpos($obj->html, '<!--im_l_mini-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/black-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/black-logo.png" alt="logo">');
                 }
 
                 $bgMain = [ $colors->secondBg, '#fcfcfc'];
@@ -167,10 +170,10 @@ class HeaderTemplate3
                 }
                 $obj->set->lastSectionColor = 'dark';
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                 }
                 if(strpos($obj->html, '<!--im_l_mini-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/light-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/light-logo.png" alt="logo">');
                 }
 
                 $bgMain = [ $colors->mainBg,  $colors->thirdBg];
@@ -239,10 +242,10 @@ class HeaderTemplate3
 
                 }
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                 }
                 if(strpos($obj->html, '<!--im_l_mini-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/light-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/light-logo.png" alt="logo">');
                 }
 
                 if($obj->set->position == 'fixed'){
@@ -289,10 +292,10 @@ class HeaderTemplate3
 
                 }
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/light-logo.png" alt="logo">');
                 }
                 if(strpos($obj->html, '<!--im_l_mini-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/light-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/light-logo.png" alt="logo">');
                 }
 
                 if($obj->set->position == 'fixed'){
@@ -355,10 +358,10 @@ class HeaderTemplate3
 
                 }
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                 }
                 if(strpos($obj->html, '<!--im_l_mini-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/black-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/black-logo.png" alt="logo">');
                 }
 
 
@@ -403,10 +406,10 @@ class HeaderTemplate3
 
                 }
                 if(strpos($obj->html, '<!--im_l-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l-->', '<img src="../images/black-logo.png" alt="logo">');
                 }
                 if(strpos($obj->html, '<!--im_l_mini-->',0)!==false){
-                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/black-logo.png" alt="">');
+                    $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_l_mini-->', '<img src="../images/black-logo.png" alt="logo">');
                 }
 
                 if($obj->set->position == 'fixed'){

@@ -43,7 +43,7 @@ class AboutTemplate3
 
     public function setPhoto($obj, $id){
         if(strpos($obj->html, '<!--im_about-->',0)!==false){
-            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_about-->', '<img src="../images/'.$this->settings->getPhotoFolderName($id).'/about.jpg" alt="about">');
+            $obj->html = $this->utilsService->parseStyle($obj->html, '<!--im_about-->', '<img class="about-img" src="../images/'.$this->settings->getPhotoFolderName($id).'/about.jpg" alt="about">');
         }
         return $obj;
     }

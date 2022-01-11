@@ -24,8 +24,21 @@ class ContactService
 
     public function getConsultationById($id){
 
-        $stm = MySQL::$db->prepare("SELECT * FROM consultation WHERE idConsultation = :id");
+        $stm = MySQL::$db->prepare("SELECT * FROM consultation WHERE idContact = :id");
         $stm->bindParam(':id', $id, \PDO::PARAM_INT);
+
+        $stm->execute();
+
+        $consultation = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        return $consultation;
+    }
+
+    public function getConsultationByIdAndStyle($id, $style){
+
+        $stm = MySQL::$db->prepare("SELECT * FROM consultation WHERE idContact = :id AND style = :styleStr");
+        $stm->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stm->bindParam(':styleStr', $style, \PDO::PARAM_STR);
 
         $stm->execute();
 
