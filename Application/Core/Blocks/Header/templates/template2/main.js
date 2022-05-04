@@ -1,4 +1,4 @@
-/*header-start*/
+
     let toggles = document.querySelectorAll(".toggle-hamburger");
     let menu = document.querySelector(".menu");
     if(menu){
@@ -37,4 +37,3 @@
 
     //header
     //hfixed
-/*header-end*/

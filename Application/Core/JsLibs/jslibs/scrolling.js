@@ -1,4 +1,4 @@
-const scrolling = (upSelector) => {
+let scrolling = (upSelector) => {
 
     const upElem = document.querySelector(upSelector);
 

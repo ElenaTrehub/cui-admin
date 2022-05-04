@@ -33,7 +33,7 @@ class FontService
     public function getFontsByRubricId($id){
 
         $stm = MySQL::$db->prepare(
-            "SELECT * FROM fonts_rubrics WHERE id = :id"
+            "SELECT * FROM fonts_subrubrics WHERE idSubrubrics = :id"
         );
         $stm->bindParam(':id', $id, \PDO::PARAM_INT);
         $stm->execute();

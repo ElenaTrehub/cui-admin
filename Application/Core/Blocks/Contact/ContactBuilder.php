@@ -19,7 +19,7 @@ class ContactBuilder
         $this->contactService = new ContactService();
     }
 
-    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userContactId = null){
+    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userContactId = null, $pageName=null){
 
         $contactId = is_null($userContactId) ? $this->getContactByRubricIdAction($id, $style) : $userContactId;
 
@@ -45,13 +45,13 @@ class ContactBuilder
                 $html = $this->utilsService->setLandingSectionName($htmlString, $idStr);
             }
             else{
-                $html = $this->utilsService->setManyPageSectionName($htmlString, $idStr);
+                $html = $this->utilsService->setManyPageSectionName($htmlString, $idStr, $pageName);
             }
 
             $style = $this->setFontStyle($styleString, $settings->fonts);
 
 
-            $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder, $settings, $id);
+            $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder, $settings, $id, $pageName);
 
 
 
@@ -59,6 +59,7 @@ class ContactBuilder
             $about->html = $obj->html;
             $about->css = $obj->style;
             $about->js = $obj->js;
+            $about->libs = $obj->libs;
             $about->set = $obj->set;
 
             return $about;
@@ -134,11 +135,11 @@ class ContactBuilder
 
 
 
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $pageName){
 
         $uniqueStyleBuilder = new $UniqueStyleBuilder();
 
-        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id);
+        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName);
 
     }
 

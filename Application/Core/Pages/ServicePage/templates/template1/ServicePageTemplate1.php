@@ -30,8 +30,9 @@ class ServicePageTemplate1
         $obj->style = $styleString;
         $obj->js = $jsString;
         $obj->set = $settings;
+        $obj->libs = '';
 
-        $serviceObj = $this->serviceBuilder->getTemplate($id, $style, $settings, 'service', $isLanding);
+        $serviceObj = $this->serviceBuilder->getTemplate($id, $style, $settings, 'service', $isLanding, 2, 'service');
 
 
 
@@ -41,9 +42,9 @@ class ServicePageTemplate1
             $obj->html = $this->utilsService->parseStyle($obj->html, '<!--service-->', $serviceObj->html);
         }
 
-        $obj->style = $obj->style.$serviceObj->css;
+        $obj->style = $obj->style.'/*service-service-start*/'.$serviceObj->css.'/*service-service-end*/';
 
-        $obj->js = $obj->js.$serviceObj->js;
+        $obj->js =  '/*service-service-start*/'.'/*libs-start*/'.$serviceObj->libs.'/*libs-end*/'.$serviceObj->js.'/*service-service-end*/'.$obj->js;
 
         return $obj;
     }

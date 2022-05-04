@@ -24,6 +24,7 @@ class HeaderTemplate3
         $obj->html = $htmlString;
         $obj->style = $styleString;
         $obj->js = $jsString;
+        $obj->libs = '';
         $obj->set = $settings;
 
 

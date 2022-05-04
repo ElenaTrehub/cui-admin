@@ -1,4 +1,4 @@
-const formSend = (formName) => {
+let formSend = (formName) => {
     const formList = document.querySelectorAll(formName);
         formList.forEach((form)=>{
         form.addEventListener('submit', function (e) {

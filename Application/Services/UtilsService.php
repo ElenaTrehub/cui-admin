@@ -35,6 +35,7 @@ class UtilsService
     public function setLandingSectionName($htmlString, $idStr){
 
         $idStr = lcfirst($idStr);
+
         $str = "<section id='{$idStr}' class='{$idStr} section'>";
 
         if(strpos($htmlString, '<!--nameSection-->',0)!==false){
@@ -43,10 +44,15 @@ class UtilsService
         return $htmlString;
     }
 
-    public function setManyPageSectionName($htmlString, $idStr){
+    public function setManyPageSectionName($htmlString, $idStr, $pageName=null){
         $idStr = lcfirst($idStr);
-        $str = "<section class='{$idStr} section'>";
 
+        if($pageName){
+            $str = "<section id='{$idStr}' class='{$idStr} {$idStr}-{$pageName} section'>";
+        }
+        else{
+            $str = "<section id='{$idStr}' class='{$idStr} section'>";
+        }
         if(strpos($htmlString, '<!--nameSection-->',0)!==false){
             $htmlString = $this->parseStyle($htmlString, '<!--nameSection-->', $str);
         }

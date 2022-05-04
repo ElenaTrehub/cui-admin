@@ -1,28 +1,28 @@
-/*feature-start*/
-.feature{
+
+/*page*/.feature{
     width: 100%;
     /*f_bg*/
 }
-.feature__title{
+/*page*/ .feature__title{
     text-align: center;
 }
-.feature-item{
+/*page*/ .feature-item{
     margin-bottom: 20px;
 }
-.feature-item__wrapper{
+/*page*/ .feature-item__wrapper{
     /*f_t_c*/
     text-transform: uppercase;
     text-align: left;
     margin-bottom: 10px;
 }
-.feature-item__title span{
+/*page*/ .feature-item__title span{
     /*f_t_span_c*/
     margin-right: 20px;
 }
 
 
 
-.feature-item__text{
+/*page*/ .feature-item__text{
     font-weight: 400;
     /*f_text_c*/
     /*f_text_border*/
@@ -30,4 +30,4 @@
     text-align: justify;
     padding-left: 15px;
 }
-/*feature-end*/
+

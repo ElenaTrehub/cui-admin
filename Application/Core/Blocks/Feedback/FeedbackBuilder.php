@@ -17,7 +17,7 @@ class FeedbackBuilder
         $this->feedbackService = new FeedbackService();
     }
 
-    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userFeedbackId = null){
+    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userFeedbackId = null, $pageName=null){
 
         $feedbackId = is_null($userFeedbackId) ? $this->getFeedbackByRubricIdAction($id, $style) : $userFeedbackId;
 
@@ -42,12 +42,12 @@ class FeedbackBuilder
                 $html = $this->utilsService->setLandingSectionName($htmlString, $idStr);
             }
             else{
-                $html = $this->utilsService->setManyPageSectionName($htmlString, $idStr);
+                $html = $this->utilsService->setManyPageSectionName($htmlString, $idStr, $pageName);
             }
 
             $style = $this->setFontStyle($styleString, $settings->fonts);
 
-            $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder, $settings, $id);
+            $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder, $settings, $id, $pageName);
 
 
 
@@ -55,8 +55,9 @@ class FeedbackBuilder
             $slider->html = $obj->html;
             $slider->css = $obj->style;
             $slider->js = $obj->js;
+            $slider->libs = $obj->libs;
             $slider->set = $obj->set;
-
+//print_r($slider->libs);
             return $slider;
         }
 
@@ -127,11 +128,11 @@ class FeedbackBuilder
 
 
 
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $pageName){
 
         $uniqueStyleBuilder = new $UniqueStyleBuilder();
 
-        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id);
+        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName);
 
     }
 

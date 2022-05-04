@@ -3,9 +3,10 @@
 return array(
 
     'get' => [
-        '/rubrics' => 'RubricController@rubricListAction',
-        '/landing/(\d+)/(\w+)/(\w+)' => 'IframeController@getLandingByRubricIdAction',
-        '/manyPage/(\d+)/(\w+)/(\w+)' => 'IframeController@getManyPageSiteByRubricIdAction',
+        '/rubrics/(\w+)' => 'RubricController@rubricListAction',
+        '/subrubrics/(\d+)/(\w+)' => 'RubricController@subrubricListAction',
+        '/landing/(\d+)/(\w+)/(\w+)/(\w+)' => 'IframeController@getLandingByRubricIdAction',
+        '/manyPage/(\d+)/(\w+)/(\w+)/(\w+)' => 'IframeController@getManyPageSiteByRubricIdAction',
         '/fonts' => 'FontController@fontListAction',
         //'/' => 'RubricController@rubricAction',
         '/sections' => 'SectionController@getSectionNames',

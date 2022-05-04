@@ -9,7 +9,7 @@ class ColorService
     public function getColorsByRubricId($id){
 
         $stm = MySQL::$db->prepare(
-            "SELECT * FROM colors_rubrics WHERE id = :id"
+            "SELECT * FROM colors_subrubrics WHERE idSubrubrics = :id"
         );
         $stm->bindParam(':id', $id, \PDO::PARAM_INT);
         $stm->execute();

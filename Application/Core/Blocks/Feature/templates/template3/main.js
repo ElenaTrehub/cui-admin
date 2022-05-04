@@ -1,9 +1,11 @@
-/*feature-start*/
-if(document.querySelector('.feature__title')){
-    let featureTitle =  document.querySelector('.feature__title');
+let selectortitle3 = '/*page*/ .feature__title';
+if(document.querySelector(selectortitle3)){
+
+    let featureTitle =  document.querySelector(selectortitle3);
     /*feature_h_c*/
 }
-if(document.querySelectorAll('.feature-item')){
+let featureItems3 = '/*page*/ .feature-item';
+if(document.querySelectorAll(featureItems3)){
     let featureItems = document.querySelectorAll('.feature-item');
 
     getFeatureItemsHeight(featureItems);
@@ -27,6 +29,6 @@ if(document.querySelectorAll('.feature-item')){
         getFeatureItemsHeight(featureItems);
     };
 }
-/*feature-end*/
+
 
 

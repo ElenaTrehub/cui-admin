@@ -1,10 +1,10 @@
-/*service-start*/
-if(document.querySelector('.service-title')){
-    let serviceTitle =  document.querySelector('.service-title');
+
+let servicetitle1 = '/*page*/ .service-title';
+if(document.querySelector(servicetitle1)){
+    let serviceTitle =  document.querySelector(servicetitle1);
     /*service_h_c*/
 
 
 
 }
 //js_code_service
-/*service-end*/

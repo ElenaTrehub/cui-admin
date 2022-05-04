@@ -21,13 +21,15 @@ class ContactTemplate1
         $this->settings = new Settings();
         $this->jsLibs = new JsLibs();
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
         $obj->style = $styleString;
         $obj->js = $jsString;
+        $obj->libs = '';
         $obj->set = $settings;
+
 
 
         if($obj->set->theme == 'normal'){
@@ -41,31 +43,44 @@ class ContactTemplate1
         }
         $obj = $this->setJs($obj);
 
+        if($pageName){
+
+            if(strpos($obj->style, '/*page*/',0)!==false){
+                $obj->style = $this->utilsService->parseStyle($obj->style, '/*page*/', '.contact-'.$pageName);
+            }
+            if(strpos($obj->js, '/*page*/',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '/*page*/', '.contact-'.$pageName);
+            }
+
+
+        }
         return $obj;
     }
 
     public function setJs($obj){
 
-        if(isset($obj->set->getMask)){
+        if(in_array('getMask', $obj->set->libs)){
             if(strpos($obj->js, '//js_code_contact',0)!==false){
                 $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_contact', 'mask(\'[name="phone"]\');');
             }
         }
         else{
-            $obj->set->getSliderOfOneItem = true;
+            array_push($obj->set->libs, 'getMask');
+            $obj->libs = $this->jsLibs->getJsLib('getMask');
             if(strpos($obj->js, '//js_code_contact',0)!==false){
-                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_contact', $this->jsLibs->getJsLib('getMask').'mask(\'[name="phone"]\');');
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_contact', 'mask(\'[name="phone"]\');');
             }
         }
-        if(isset($obj->set->formSend)){
+        if(in_array('formSend', $obj->set->libs)){
             if(strpos($obj->js, '//js_code_send',0)!==false){
                 $obj->js += $this->utilsService->parseStyle($obj->js, '//js_code_send', 'formSend("form");');
             }
         }
         else{
-            $obj->set->formSend = true;
+            array_push($obj->set->libs, 'formSend');
+            $obj->libs = $obj->libs.$this->jsLibs->getJsLib('formSend');
             if(strpos($obj->js, '//js_code_send',0)!==false){
-                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_send', $this->jsLibs->getJsLib('formSend').'formSend("form");');
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_send', 'formSend("form");');
             }
         }
 

@@ -8,10 +8,10 @@ use Application\Utils\MySQL;
 
 class SliderService
 {
-    public function getMainsByRubricId($id){
+    public function getMainsBySubRubricId($id){
 
         $stm = MySQL::$db->prepare(
-            "SELECT * FROM mains_rubrics WHERE id = :id"
+            "SELECT * FROM mains_subrubrics WHERE idSubrubric = :id"
         );
         $stm->bindParam(':id', $id, \PDO::PARAM_INT);
         $stm->execute();

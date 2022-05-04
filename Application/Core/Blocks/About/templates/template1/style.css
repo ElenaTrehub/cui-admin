@@ -1,23 +1,23 @@
-/*about-start*/
-.about{
+
+/*page*/.about{
     width: 100%;
     /*a_bg*/
 }
 
 
-.about-photo img{
+/*page*/ .about-photo img{
     width: 100%;
     height: auto;
 }
 
 
-.about-content{
+/*page*/ .about-content{
     padding-left: 40px;
     box-sizing: border-box;
 }
 
 
-.about-content__text{
+/*page*/ .about-content__text{
     font-weight: 300;
     /*a_t_c*/
     text-indent: 20px;
@@ -26,9 +26,8 @@
 }
 
 @media (max-width: 768px) {
-    .about-content{
+    /*page*/ .about-content{
         margin-top: 30px;
         padding-left: 12px;
     }
 }
-/*about-end*/

@@ -1,4 +1,4 @@
-const sliderOneSlideOpacity = (slideItems, wrapper,  prevBtn, nextBtn) => {
+let sliderOneSlideOpacity = (slideItems, wrapper,  prevBtn, nextBtn) => {
     const slides = document.querySelectorAll(slideItems),
         prev = document.querySelector(prevBtn),
         next = document.querySelector(nextBtn),

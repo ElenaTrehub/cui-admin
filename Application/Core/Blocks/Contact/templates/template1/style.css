@@ -1,31 +1,30 @@
-/*contact-start*/
-.contact {
+
+/*page*/.contact {
     /*contact_bg*/
 }
-.contact-title{
+/*page*/ .contact-title{
     text-align: center;
 }
-.contact .input-wrapper {
+/*page*/ .contact .input-wrapper {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.contact input {
+/*page*/ .contact input {
     width: 30%;
     margin-bottom: 3rem;
 }
 
-.contact .input-text {
+/*page*/ .contact .input-text {
     display: block;
     width: 100%;
 }
-.contact .button-order {
+/*page*/ .contact .button-order {
     margin-top: 1rem;
 }
 
 @media (max-width: 991px) {
-    .contact input {
+    /*page*/ .contact input {
         width: 100%;
     }
 }
-/*contact-end*/

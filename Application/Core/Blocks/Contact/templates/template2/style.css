@@ -1,42 +1,42 @@
-/*contact-start*/
-.contact {
+
+/*page*/.contact {
     /*contact_bg*/
 }
-.contact-title{
+/*page*/ .contact-title{
     text-align: center;
 }
-.contact-content{
+/*page*/ .contact-content{
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
 }
-.contact-content__text{
+/*page*/ .contact-content__text{
     text-align: left;
     padding-right: 20px;
     margin-bottom: 30px;
 
     /*contact_content_c*/
 }
-.contact-content__info p{
+/*page*/ .contact-content__info p{
     margin-bottom: 20px;
     /*contact_info_c*/
 }
-.contact-content__info span{
+/*page*/ .contact-content__info span{
     /*contact_span_c*/
 }
-.contact .input-wrapper {
+/*page*/ .contact .input-wrapper {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.contact input {
+/*page*/ .contact input {
     width: 100%;
     margin-bottom: 30px;
 }
 
 
-.contact .button-order {
+/*page*/ .contact .button-order {
     margin-top: 1rem;
 }
-/*contact-end*/
+
 

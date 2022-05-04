@@ -26,6 +26,7 @@ class MainTemplate2
         $obj->html = $htmlString;
         $obj->style = $styleString;
         $obj->js = $jsString;
+        $obj->libs = '';
         $obj->set = $settings;
 
         if($obj->set->theme == 'normal'){
@@ -95,15 +96,16 @@ class MainTemplate2
         switch ($variantDots) {
             case 1:
             {
-                if(isset($obj->set->getSliderOneSlideAllWidth)){
+                if(isset($obj->set->libs->getSliderOneSlideAllWidth)){
                     if(strpos($obj->js, '//js_code_main',0)!==false){
                         $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_main', 'sliderOneSlideAllWidth(".main-slider-item", ".main", ".main-slider",  ".main-prev-btn", ".main-next-btn");');
                     }
                 }
                 else{
-                    $obj->set->getSliderOneSlideAllWidth = true;
+                    $obj->set->libs->getSliderOneSlideAllWidth = true;
+                    $obj->libs = $this->jsLibs->getJsLib('getSliderOneSlideAllWidth');
                     if(strpos($obj->js, '//js_code_main',0)!==false){
-                        $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_main', $this->jsLibs->getJsLib('getSliderOneSlideAllWidth').'sliderOneSlideAllWidth(".main-slider-item", ".main", ".main-slider",  ".main-prev-btn", ".main-next-btn");');
+                        $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_main', 'sliderOneSlideAllWidth(".main-slider-item", ".main", ".main-slider",  ".main-prev-btn", ".main-next-btn");');
                     }
                 }
                 break;
@@ -113,15 +115,16 @@ class MainTemplate2
                 if(strpos($obj->style, '/*main_wrapper*/',0)!==false){
                     $obj->style = $this->utilsService->parseStyle($obj->style, '/*main_wrapper*/', '.main-slider{width: 100%;}');
                 }
-                if(isset($obj->set->getSliderOneSlideOpacity)){
+                if(isset($obj->set->libs->getSliderOneSlideOpacity)){
                     if(strpos($obj->js, '//js_code_main',0)!==false){
                         $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_main', 'sliderOneSlideOpacity(".main-slider-item", ".main",  ".main-prev-btn", ".main-next-btn");');
                     }
                 }
                 else{
-                    $obj->set->getSliderOneSlideAllWidth = true;
+                    $obj->set->libs->getSliderOneSlideAllWidth = true;
+                    $obj->libs = $this->jsLibs->getJsLib('getSliderOneSlideOpacity');
                     if(strpos($obj->js, '//js_code_main',0)!==false){
-                        $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_main', $this->jsLibs->getJsLib('getSliderOneSlideOpacity').'sliderOneSlideOpacity(".main-slider-item", ".main",  ".main-prev-btn", ".main-next-btn");');
+                        $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_main', 'sliderOneSlideOpacity(".main-slider-item", ".main",  ".main-prev-btn", ".main-next-btn");');
                     }
                 }
 

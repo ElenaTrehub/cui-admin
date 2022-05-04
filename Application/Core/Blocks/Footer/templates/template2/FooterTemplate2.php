@@ -23,6 +23,7 @@ class FooterTemplate2
         $obj->html = $htmlString;
         $obj->style = $styleString;
         $obj->js = $jsString;
+        $obj->libs = '';
         $obj->set = $settings;
 
 

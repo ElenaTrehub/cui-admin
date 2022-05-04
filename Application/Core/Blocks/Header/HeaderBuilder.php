@@ -26,9 +26,9 @@ class HeaderBuilder
         $this->settings = new Settings();
     }
 
-    public function getTemplate($id, $style, $settings, $menu, $isLanding, $userHeaderId = null){
+    public function getTemplate($id, $style, $settings, $menu, $isLanding, $lang, $userHeaderId = null){
 
-        $headerId = is_null($userHeaderId) ? $this->getHeaderByRubricIdAction($id, $style) : $userHeaderId;
+        $headerId = is_null($userHeaderId) ? $this->getHeaderBySubRubricIdAction($id, $style) : $userHeaderId;
 
         //$headerId = 2;
         $pathToTemplate = '../Application/Core/Blocks/Header/templates/template'.$headerId;
@@ -46,6 +46,7 @@ class HeaderBuilder
             $jsString = file_get_contents($jslFile);
 
             if($isLanding === true){
+
                 $html = $this->setLandingMenu($htmlString, $menu);
             }
             else{
@@ -66,6 +67,7 @@ class HeaderBuilder
             $header->html = $obj->html;
             $header->css = $obj->style;
             $header->js = $obj->js;
+            $header->libs = $obj->libs;
             $header->set = $obj->set;
 
 
@@ -101,10 +103,9 @@ class HeaderBuilder
         return $headersStyleArray;
 
     }
-    public function getHeaderByRubricIdAction($id, $style){
+    public function getHeaderBySubRubricIdAction($id, $style){
 
-        $headers = $this->headerService->getHeadersByRubricId($id);
-
+        $headers = $this->headerService->getHeadersBySubRubricId($id);
 
 
         $headerArray = [];
@@ -137,13 +138,15 @@ class HeaderBuilder
 
 
     public function setLandingMenu($htmlString, $menu){
-
+//var_dump($menu);
+        $menuArray = explode(",", $menu->menuStr);
+        $translateArray = explode(",", $menu->langMenuStr);
         $menuStr = '';
 
-        for ($i = 0; $i < count($menu); $i++){
+        for ($i = 0; $i < count($menuArray); $i++){
 
-            $translate = $this->settings->getTranslateForMenu($menu[$i], 'ru');
-            $linkStr = lcfirst($menu[$i]);
+            $translate = $translateArray[$i];
+            $linkStr = lcfirst($menuArray[$i]);
             $menuStr = $menuStr."<li><a class='linkSize' href='#{$linkStr}'> $translate </a></li>";
 
         }

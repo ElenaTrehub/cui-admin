@@ -1,26 +1,26 @@
-/*feedback-start*/
-.feedback {
+
+/*page*/.feedback {
 
     /*feed_bg*/
     padding: 40px 0;
 }
-.feedback-wrapper{
+/*page*/ .feedback-wrapper{
     overflow: hidden;
     position: relative;
 }
 
-.feedback-title{
+/*page*/ .feedback-title{
     text-align: center;
 
 }
-.feedback-slider{
+/*page*/ .feedback-slider{
 
 }
-.feedback-slider-item {
+/*page*/ .feedback-slider-item {
     padding: 0 25px 20px 25px;
     box-sizing: border-box;
 }
-.feedback-heading {
+/*page*/ .feedback-heading {
     line-height: 36px;
     text-align: left;
     margin-top: 45px;
@@ -28,7 +28,7 @@
     /*feed_h_c*/
 }
 
-.feedback-text {
+/*page*/ .feedback-text {
     text-align: left;
     font-style: italic;
     line-height: 1.5;
@@ -36,12 +36,12 @@
     /*feed_t_c*/
 }
 
-.feedback-signature {
+/*page*/ .feedback-signature {
     text-align: left;
     /*feed_s_c*/
 }
 
-.feedback-slider-btn_group {
+/*page*/ .feedback-slider-btn_group {
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -52,7 +52,6 @@
     right: 0;
     z-index: 100;
 }
-.feedback-prev-btn, .feedback-next-btn{
+/*page*/ .feedback-prev-btn, .feedback-next-btn{
     margin: 0 20px;
 }
-/*feedback-end*/

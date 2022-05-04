@@ -60,6 +60,7 @@ class FooterBuilder
             $footer->html = $obj->html;
             $footer->css = $obj->style;
             $footer->js = $obj->js;
+            $footer->libs = $obj->libs;
             $footer->set = $obj->set;
 
 

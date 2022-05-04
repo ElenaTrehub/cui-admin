@@ -20,12 +20,13 @@ class  FeedbackTemplate1
         $this->jsLibs = new JsLibs();
         $this->settings = new Settings();
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
         $obj->style = $styleString;
         $obj->js = $jsString;
+        $obj->libs = '';
         $obj->set = $settings;
 
 
@@ -42,20 +43,34 @@ class  FeedbackTemplate1
 
         $obj = $this->setJs($obj);
 
+        if($pageName){
+
+            if(strpos($obj->style, '/*page*/',0)!==false){
+                $obj->style = $this->utilsService->parseStyle($obj->style, '/*page*/', '.feedback-'.$pageName);
+            }
+            if(strpos($obj->js, '/*page*/',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '/*page*/', '.feedback-'.$pageName);
+            }
+
+
+        }
+
         return $obj;
     }
 
     public function setJs($obj){
 
-        if(isset($obj->set->getSliderOfOneItem)){
+        if(in_array('getSliderOfOneItem', $obj->set->libs)){
             if(strpos($obj->js, '//js_code_feedback',0)!==false){
                 $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', 'sliderOneSlide(".feedback-slider-item", "horisontal", ".feedback-prev-btn", ".feedback-next-btn");');
             }
         }
         else{
-            $obj->set->getSliderOfOneItem = true;
+
+            array_push($obj->set->libs, 'getSliderOfOneItem');
+            $obj->libs = $obj->libs.$this->jsLibs->getJsLib('getSliderOfOneItem');
             if(strpos($obj->js, '//js_code_feedback',0)!==false){
-                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', $this->jsLibs->getJsLib('getSliderOfOneItem').'sliderOneSlide(".feedback-slider-item", "horisontal", ".feedback-prev-btn", ".feedback-next-btn");');
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', 'sliderOneSlide(".feedback-slider-item", "horisontal", ".feedback-prev-btn", ".feedback-next-btn");');
             }
         }
 

@@ -4,6 +4,7 @@
 namespace Application\Core\Settings;
 
 
+use Application\Services\SettingService;
 use Application\Services\UtilsService;
 
 class   Settings
@@ -26,7 +27,7 @@ class   Settings
 
         $this->landingMenu = [
             //6 => ['Main', 'About', 'Feature', 'Service', 'Feedback', 'Contact']
-            6 => ['Main', 'About', 'Feedback', 'Contact']
+            1 => ['Main', 'About', 'Feature', 'Contact']
         ];
 
         $this->sectionNames = [
@@ -51,15 +52,32 @@ class   Settings
             'Contact'=>['ru'=> 'Контакты', 'en'=>'Contact']
         ];
     }
+    public function getLandingMenu($id, $lang){
+
+        $settingService = new SettingService();
+
+        $landingMenu = $settingService->getLandingMenu($id, $lang);
+        return $landingMenu;
+
+    }
+    public function getTranslate($str, $lang){
+
+        $settingService = new SettingService();
+
+        $translateStr = $settingService->getTranslate($str, $lang);
+
+        return $translateStr;
+
+    }
     public function getPhotoFolderName($rubricId){
         return $this->photoDir[$rubricId];
     }
     public function getSiteMenu($rubricId){
         return $this->siteMenu[$rubricId];
     }
-    public function getLandingMenu($rubricId){
-        return $this->landingMenu[$rubricId];
-    }
+    //public function getLandingMenu($rubricId){
+        //return $this->landingMenu[$rubricId];
+    //}
     public function getTranslateForMenu($page, $lang){
         return $this->translateForMenu[$page][$lang];
     }

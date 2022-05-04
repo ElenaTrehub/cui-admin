@@ -1,7 +1,8 @@
-/*feature-start*/
-if(document.querySelector('.feature__title')){
-    let featureTitle =  document.querySelector('.feature__title');
+let selectortitle1 = '/*page*/ .feature__title';
+if(document.querySelector(selectortitle1)){
+
+    let featureTitle =  document.querySelector(selectortitle1);
     /*feature_h_c*/
 }
-/*feature-end*/
+
 

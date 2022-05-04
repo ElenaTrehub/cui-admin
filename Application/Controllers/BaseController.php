@@ -5,6 +5,7 @@ namespace Application\Controllers;
 
 use Application\Utils\Request;
 use Application\Utils\Storage;
+use http\Cookie;
 
 
 class BaseController
@@ -43,10 +44,13 @@ class BaseController
 
     protected function json(  $data ){
 
-        header('Access-Control-Allow-Origin: http://cui-admin:1252');
-
-        header('Content-type: application/json');
-
+        header('Access-Control-Allow-Origin: http://cui-prog:1252');
+        //header('Access-Control-Allow-Credentials: true');
+        //header('Access-Control-Request-Headers: Content-Type, API-Key');
+        //header('Content-type: application/json');
+        //header('Set-Cookie: SameSite=None; Secure');
+        //header('Set-Cookie: session='.session_id().'; SameSite=None', false);
+        //setcookie('session', session_id());
         echo json_encode($data); //  res.send();
         exit();
 

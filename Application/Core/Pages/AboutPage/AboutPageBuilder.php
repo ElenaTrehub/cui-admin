@@ -49,7 +49,7 @@ class AboutPageBuilder
             $about->css = $obj->style;
             $about->js = $obj->js;
             $about->set = $obj->set;
-
+            //$about->libs = $obj->libs;
             return $about;
         }
 

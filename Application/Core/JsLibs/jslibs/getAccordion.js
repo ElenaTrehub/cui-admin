@@ -1,4 +1,4 @@
-const accordion = (triggersSelector) => {
+let accordion = (triggersSelector) => {
     const btns = document.querySelectorAll(triggersSelector);
 
     btns.forEach(item => {

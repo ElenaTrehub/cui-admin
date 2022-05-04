@@ -1,25 +1,25 @@
-/*service-start*/
-.service {
+
+/*page*/.service {
     /*service_bg*/
     padding: 40px 0;
 }
-.service-title{
+/*page*/ .service-title{
     text-align: center;
     /*service_h_c*/
 }
-.service-content{
+/*page*/ .service-content{
     text-align: center;
     margin-bottom: 30px;
     /*ser_c_content*/
 
 }
-.service-wrapper__accordion{
+/*page*/ .service-wrapper__accordion{
     padding-left: 30px;
     box-sizing: border-box;
 }
 
 
-.service-heading{
+/*page*/ .service-heading{
     position: relative;
     cursor: pointer;
     text-align: left;
@@ -28,7 +28,7 @@
     margin: 0;
     /*service_head_c*/
 }
-.service-heading:after{
+/*page*/ .service-heading:after{
     position: absolute;
     content: '+';
     font-size: 24px;
@@ -37,50 +37,50 @@
     top: 8px;
     bottom: 0;
 }
-.service-heading.active-style:after{
+/*page*/ .service-heading.active-style:after{
     content: '-';
 }
-.service-heading:first-child{
+/*page*/ .service-heading:first-child{
     /*service_head_border_top_c*/
 }
-.service-wrapper__img img{
+/*page*/ .service-wrapper__img img{
     width: 100%;
     height: auto;
 }
-p.active-style span {
+/*page*/ p.active-style span {
     /*service_head_c_active*/
     font-weight: 900;
     text-decoration: none;
     border: 0;
 }
-.service-heading.active+.accordion-block{
+/*page*/ .service-heading.active+.accordion-block{
     display: block;
 }
 
-.service-text {
+/*page*/ .service-text {
     max-height: 0;
     transition: all 0.3s ease-out;
     overflow: hidden;
     /*service_t_c*/
 }
 
-.service-text.active-content {
+/*page*/ .service-text.active-content {
     overflow: visible;
     /*service_text_border_c*/
     padding: 15px 0;
 }
-.service-text.active-content:last-child{
+/*page*/ .service-text.active-content:last-child{
     border-bottom: none;
 
 
 }
 @media (max-width: 768px) {
-    .service-wrapper__accordion{
+    /*page*/ .service-wrapper__accordion{
         padding-left: 15px;
         margin-top: 20px;
     }
 }
-/*service-end*/
+
 
 
 

@@ -17,12 +17,13 @@ class FeatureTemplate3
         $this->utilsService = new UtilsService();
         $this->settings = new Settings();
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
         $obj->style = $styleString;
         $obj->js = $jsString;
+        $obj->libs = '';
         $obj->set = $settings;
 
 
@@ -35,7 +36,17 @@ class FeatureTemplate3
         else{
             $obj = $this->setDarkColorStyle($obj, $settings->colors, $id);
         }
+        if($pageName){
 
+            if(strpos($obj->style, '/*page*/',0)!==false){
+                $obj->style = $this->utilsService->parseStyle($obj->style, '/*page*/', '.feature-'.$pageName);
+            }
+            if(strpos($obj->js, '/*page*/',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '/*page*/', '.feature-'.$pageName);
+            }
+
+
+        }
 
         return $obj;
     }

@@ -1,4 +1,4 @@
-const sliderOneSlideAllWidth = (slideItems, wrapper, slider,  prevBtn, nextBtn) => {
+let sliderOneSlideAllWidth = (slideItems, wrapper, slider,  prevBtn, nextBtn) => {
 
     const slides = document.querySelectorAll(slideItems),
         slidesWrapper = document.querySelector(wrapper),

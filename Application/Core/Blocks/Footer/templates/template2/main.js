@@ -1,5 +1,4 @@
-/*footer-start*/
-/*footer-end*/
+
 
 
 

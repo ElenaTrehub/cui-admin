@@ -1,44 +1,43 @@
-/*about-start*/
-.about{
+
+/*page*/.about{
     width: 100%;
     /*a_bg*/
 }
-.about-content__title{
+/*page*/ .about-content__title{
     text-align: center;
 }
-.section_content h3{
+/*page*/ .section_content h3{
     /*a_h3_c*/
 
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 10px;
 }
-.section_content h2{
+/*page*/ .section_content h2{
 
     text-transform: uppercase;
     /*a_h2_c*/
     text-align: center;
     margin-bottom: 20px;
 }
-.section_content p{
+/*page*/ .section_content p{
 
     /*a_t_c*/
     margin-bottom: 20px;
 }
-.about-first_block p:nth-child(2n){
+/*page*/ .about-first_block p:nth-child(2n){
     /*a_f_b_c*/
 }
-.about-last_block p:nth-child(2n+1){
+/*page*/ .about-last_block p:nth-child(2n+1){
     /*a_l_b_c*/
 }
-.person{
+/*page*/ .person{
     text-align: center;
     margin-bottom: 40px;
 
 }
-.person img{
+/*page*/ .person img{
     max-width: 220px;
     display: inline-block;
     border-radius: 50%;
 }
-/*about-end*/

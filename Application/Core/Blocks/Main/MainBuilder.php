@@ -22,11 +22,11 @@ class MainBuilder
         $this->sliderService = new SliderService();
     }
 
-    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userSliderId=null){
+    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $lang, $userSliderId=null){
 
-        $sliderId = is_null($userSliderId) ? $this->getSliderByRubricIdAction($id, $style) : $userSliderId;
+        $sliderId = is_null($userSliderId) ? $this->getSliderBySubRubricIdAction($id, $style) : $userSliderId;
 
-        $sliderId = 3;
+        $sliderId = 1;
         $pathToTemplate = '../Application/Core/Blocks/Main/templates/template'.$sliderId;
 
 
@@ -51,7 +51,7 @@ class MainBuilder
             }
             $style = $this->setFontStyle($styleString, $settings->fonts);
 
-            $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder, $settings, $id);
+            $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder, $settings, $id, $lang);
 
 
 
@@ -59,6 +59,7 @@ class MainBuilder
             $slider->html = $obj->html;
             $slider->css = $obj->style;
             $slider->js = $obj->js;
+            $slider->libs = $obj->libs;
             $slider->set = $obj->set;
 
             return $slider;
@@ -69,7 +70,7 @@ class MainBuilder
 
     public function getSectionsByName($id, $styleName){
 
-        $mains = $this->sliderService->getMainsByRubricId($id);
+        $mains = $this->sliderService->getMainsBySubRubricId($id);
 
         $mainsArray = [];
         foreach ($mains as $key=>$item){
@@ -94,9 +95,9 @@ class MainBuilder
 
     }
 
-    public function getSliderByRubricIdAction($id, $style){
+    public function getSliderBySubRubricIdAction($id, $style){
 
-        $sliders = $this->sliderService->getMainsByRubricId($id);
+        $sliders = $this->sliderService->getMainsBySubRubricId($id);
 
 
         $slidersArray = [];
@@ -143,11 +144,11 @@ class MainBuilder
         return $style;
     }
 
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $lang){
 
         $uniqueStyleBuilder = new $UniqueStyleBuilder();
 
-        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id);
+        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $lang);
 
     }
 

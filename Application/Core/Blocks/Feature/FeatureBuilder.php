@@ -18,11 +18,11 @@ class FeatureBuilder
         $this->featureService = new FeatureService();
     }
 
-    public function getTemplate($id, $style, $settings,  $idStr, $isLanding, $userFeatureId = null){
+    public function getTemplate($id, $style, $settings,  $idStr, $isLanding, $userFeatureId = null, $pageName=null){
 
         $featureId = is_null($userFeatureId) ? $this->getFeatureByRubricIdAction($id, $style) : $userFeatureId;
 
-        //$featureId = 3;
+        //$featureId = 1;
         $pathToTemplate = '../Application/Core/Blocks/Feature/templates/template'.$featureId;
 
 
@@ -40,13 +40,13 @@ class FeatureBuilder
             $jsString = file_get_contents($jslFile);
 
             if($isLanding === true){
-                $html = $this->utilsService->setLandingSectionName($htmlString, $idStr);
+                $html = $this->utilsService->setLandingSectionName($htmlString, $idStr );
             }
             else{
-                $html = $this->utilsService->setManyPageSectionName($htmlString, $idStr);
+                $html = $this->utilsService->setManyPageSectionName($htmlString, $idStr, $pageName);
             }
 
-            $obj = $this->setUniqueStyle($styleString, $html, $jsString, $UniqueStyleBuilder, $settings, $id);
+            $obj = $this->setUniqueStyle($styleString, $html, $jsString, $UniqueStyleBuilder, $settings, $id, $pageName);
 
 
 
@@ -54,8 +54,9 @@ class FeatureBuilder
             $slider->html = $obj->html;
             $slider->css = $obj->style;
             $slider->js = $obj->js;
+            $slider->libs = $obj->libs;
             $slider->set = $obj->set;
-
+//print_r($slider->set->libs);
             return $slider;
         }
 
@@ -124,11 +125,11 @@ class FeatureBuilder
 
 
 
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $pageName){
 
         $uniqueStyleBuilder = new $UniqueStyleBuilder();
 
-        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id);
+        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName);
 
     }
 }

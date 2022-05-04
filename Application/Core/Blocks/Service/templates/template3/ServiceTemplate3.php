@@ -20,12 +20,13 @@ class ServiceTemplate3
         $this->jsLibs = new JsLibs();
         $this->settings = new Settings();
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
         $obj->style = $styleString;
         $obj->js = $jsString;
+        $obj->libs = '';
         $obj->set = $settings;
 
 
@@ -42,6 +43,18 @@ class ServiceTemplate3
             $obj = $this->setDarkColorStyle($obj, $settings->colors, $id);
         }
         $obj = $this->setJs($obj);
+
+        if($pageName){
+
+            if(strpos($obj->style, '/*page*/',0)!==false){
+                $obj->style = $this->utilsService->parseStyle($obj->style, '/*page*/', '.service-'.$pageName);
+            }
+            if(strpos($obj->js, '/*page*/',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '/*page*/', '.service-'.$pageName);
+            }
+
+
+        }
 
         return $obj;
     }
@@ -62,17 +75,17 @@ class ServiceTemplate3
 
     public function setJs($obj){
 
-        if(isset($obj->set->getSliderOfThreeItems) && $obj->set->getSliderOfThreeItems == true){
+        if(in_array('getSliderOfThreeItems', $obj->set->libs)){
 
             if(strpos($obj->js, '//js_code_service',0)!==false){
                 $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_service', 'slidesThreeSlider(".service-slider-item", ".service-wrapper", ".service-slider", ".service-prev-btn", ".service-next-btn");');
             }
         }
         else{
-            //echo 2;
-            $obj->set->getSliderOfThreeItems = true;
+            array_push($obj->set->libs, 'getSliderOfThreeItems');
+            $obj->libs = $obj->libs.$this->jsLibs->getJsLib('getSliderOfThreeItems');
             if(strpos($obj->js, '//js_code_service',0)!==false){
-                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_service', $this->jsLibs->getJsLib('getSliderOfThreeItems').'slidesThreeSlider(".service-slider-item", ".service-wrapper", ".service-slider", ".service-prev-btn", ".service-next-btn");');
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_service', 'slidesThreeSlider(".service-slider-item", ".service-wrapper", ".service-slider", ".service-prev-btn", ".service-next-btn");');
             }
         }
 

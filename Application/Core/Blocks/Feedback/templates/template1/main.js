@@ -1,9 +1,9 @@
-/*feedback-start*/
-if(document.querySelector('.feedback-title')){
-    let feedbackTitle = document.querySelector('.feedback-title') ;
+
+let feedbacktitle1 = '/*page*/ .feedback-title';
+if(document.querySelector(feedbacktitle1)){
+    let feedbackTitle = document.querySelector(feedbacktitle1) ;
     /*feedback_h_c*/
 
 
 }
 //js_code_feedback
-/*feedback-end*/

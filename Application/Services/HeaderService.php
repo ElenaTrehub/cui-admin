@@ -6,10 +6,10 @@ use Application\Utils\MySQL;
 
 class HeaderService
 {
-    public function getHeadersByRubricId($id){
+    public function getHeadersBySubRubricId($id){
 
         $stm = MySQL::$db->prepare(
-            "SELECT * FROM headers_rubrics WHERE id = :id"
+            "SELECT * FROM header_subrubrics WHERE idSubrubric = :id"
         );
         $stm->bindParam(':id', $id, \PDO::PARAM_INT);
         $stm->execute();

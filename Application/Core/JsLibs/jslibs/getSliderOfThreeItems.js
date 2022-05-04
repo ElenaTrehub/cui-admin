@@ -1,4 +1,4 @@
-const slidesThreeSlider = (items, wrapper, slider, prevBtn, nextBtn) => {
+let slidesThreeSlider = (items, wrapper, slider, prevBtn, nextBtn) => {
     let slides = document.querySelectorAll(items),
         prev = document.querySelector(prevBtn),
         next = document.querySelector(nextBtn),

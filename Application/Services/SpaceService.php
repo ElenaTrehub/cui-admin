@@ -9,7 +9,7 @@ class SpaceService
     public function getSpacesByRubricId($id){
 
         $stm = MySQL::$db->prepare(
-            "SELECT * FROM spaces_rubrics WHERE id = :id"
+            "SELECT * FROM spaces_subrubrics WHERE idSubrubrics = :id"
         );
         $stm->bindParam(':id', $id, \PDO::PARAM_INT);
         $stm->execute();

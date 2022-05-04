@@ -20,12 +20,13 @@ class FeedbackTemplate2
         $this->jsLibs = new JsLibs();
         $this->settings = new Settings();
     }
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName){
 
         $obj = new \stdClass();
         $obj->html = $htmlString;
         $obj->style = $styleString;
         $obj->js = $jsString;
+        $obj->libs = '';
         $obj->set = $settings;
 
 
@@ -41,6 +42,17 @@ class FeedbackTemplate2
         }
         $obj = $this->setJs($obj);
 
+        if($pageName){
+
+            if(strpos($obj->style, '/*page*/',0)!==false){
+                $obj->style = $this->utilsService->parseStyle($obj->style, '/*page*/', '.feedback-'.$pageName);
+            }
+            if(strpos($obj->js, '/*page*/',0)!==false){
+                $obj->js = $this->utilsService->parseStyle($obj->js, '/*page*/', '.feedback-'.$pageName);
+            }
+
+
+        }
         return $obj;
     }
 
@@ -84,15 +96,16 @@ class FeedbackTemplate2
 
     public function setJs($obj){
 
-        if(isset($obj->set->getSliderOfThreeItems) && $obj->set->getSliderOfThreeItems === true){
+        if(in_array('getSliderOfThreeItems', $obj->set->libs)){
             if(strpos($obj->js, '//js_code_feedback',0)!==false){
                 $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', 'slidesThreeSlider(".feedback-slider-item", ".feedback-wrapper", ".feedback-slider", ".feedback-prev-btn", ".feedback-next-btn");');
             }
         }
         else{
-            $obj->set->getSliderOfThreeItems = true;
+            array_push($obj->set->libs, 'getSliderOfThreeItems');
+            $obj->libs = $obj->libs.$this->jsLibs->getJsLib('getSliderOfThreeItems');
             if(strpos($obj->js, '//js_code_feedback',0)!==false){
-                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', $this->jsLibs->getJsLib('getSliderOfThreeItems').'slidesThreeSlider(".feedback-slider-item", ".feedback-wrapper", ".feedback-slider", ".feedback-prev-btn", ".feedback-next-btn");');
+                $obj->js = $this->utilsService->parseStyle($obj->js, '//js_code_feedback', 'slidesThreeSlider(".feedback-slider-item", ".feedback-wrapper", ".feedback-slider", ".feedback-prev-btn", ".feedback-next-btn");');
             }
         }
 

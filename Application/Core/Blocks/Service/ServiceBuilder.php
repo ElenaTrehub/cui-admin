@@ -19,11 +19,11 @@ class ServiceBuilder
         $this->serviceService = new ServiceService();
     }
 
-    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userServiceId = null){
+    public function getTemplate($id, $style, $settings, $idStr, $isLanding, $userServiceId = null, $pageName=null){
 
         $serviceId = is_null($userServiceId) ? $this->getServiceByRubricIdAction($id, $style) : $userServiceId;
 
-        $serviceId = 3;
+        //$serviceId = 3;
         $pathToTemplate = '../Application/Core/Blocks/Service/templates/template'.$serviceId;
 
 
@@ -44,12 +44,12 @@ class ServiceBuilder
                 $html = $this->utilsService->setLandingSectionName($htmlString, $idStr);
             }
             else{
-                $html = $this->utilsService->setManyPageSectionName($htmlString, $idStr);
+                $html = $this->utilsService->setManyPageSectionName($htmlString, $idStr, $pageName);
             }
 
             $style = $this->setFontStyle($styleString, $settings->fonts);
 
-            $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder, $settings, $id);
+            $obj = $this->setUniqueStyle($style, $html, $jsString, $UniqueStyleBuilder, $settings, $id, $pageName);
 
 
 
@@ -57,6 +57,7 @@ class ServiceBuilder
             $slider->html = $obj->html;
             $slider->css = $obj->style;
             $slider->js = $obj->js;
+            $slider->libs = $obj->libs;
             $slider->set = $obj->set;
 
             return $slider;
@@ -127,11 +128,11 @@ class ServiceBuilder
         return $style;
     }
 
-    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id){
+    public function setUniqueStyle($styleString, $htmlString, $jsString, $UniqueStyleBuilder, $settings, $id, $pageName){
 
         $uniqueStyleBuilder = new $UniqueStyleBuilder();
 
-        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id);
+        return $uniqueStyleBuilder->setUniqueStyle($styleString, $htmlString, $jsString, $settings, $id, $pageName);
 
     }
 }
